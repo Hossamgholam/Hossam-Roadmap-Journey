@@ -60,27 +60,6 @@ The goal is to deeply understand how computers and software systems work.
 
 ---
 
-## 🏗️ Main Technical Skills Developed
-
-- Problem Solving & Logical Thinking
-- Algorithm Analysis
-- Object-Oriented Design
-- Data Structures Implementation
-- Memory & Execution Understanding
-- Number Systems & Encoding
-- Compiler vs Interpreter Execution Model
-
----
-
-## 🔥 Current Focus
-
-- Advanced OOP Design
-- Clean Architecture
-- ASP.NET Core
-- Database Systems
-- Backend Engineering
-
----
 
 ## 📌 Long-Term Goal
 
