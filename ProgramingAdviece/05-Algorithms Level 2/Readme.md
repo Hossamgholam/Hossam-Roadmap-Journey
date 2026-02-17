@@ -118,12 +118,6 @@ These projects are available in a separate repository:
 🔗 **Core Concepts Projects (C++)**  
 - [[math-quiz](https://github.com/Hossamgholam/CPP-Core-Concepts-Projects/tree/8b21c2edfeb2bb789dad73a5fe70549840dc3707/basics/math-quiz)]
 - [[math-quiz](https://github.com/Hossamgholam/CPP-Core-Concepts-Projects/tree/8b21c2edfeb2bb789dad73a5fe70549840dc3707/basics/rock-paper-scissors))]
-The projects demonstrate:
-
-- Structured programming practices  
-- Multi-file organization  
-- Reusable utility usage  
-- Real-world problem simulation  
 
 They reflect my transition from solving exercises to building complete applications.
 
