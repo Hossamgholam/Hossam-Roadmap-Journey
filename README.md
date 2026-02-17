@@ -19,7 +19,7 @@ This repository documents my progress through a complete Computer Science roadma
 🎓 Computer Science Student  
 💻 Backend Developer (ASP.NET Core Focus)  
 🧠 Strong Interest in Algorithms & System Understanding  
-🚀 Building real understanding — not just writing code  
+🚀 Building real understanding not just writing code  
 
 ---
 
