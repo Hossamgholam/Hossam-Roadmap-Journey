@@ -116,8 +116,8 @@ During this stage, I also built two practical console-based projects applying th
 These projects are available in a separate repository:
 
 🔗 **Core Concepts Projects (C++)**  
-[[math-quiz](https://github.com/Hossamgholam/CPP-Core-Concepts-Projects/tree/8b21c2edfeb2bb789dad73a5fe70549840dc3707/basics/math-quiz)]
-
+-[[math-quiz](https://github.com/Hossamgholam/CPP-Core-Concepts-Projects/tree/8b21c2edfeb2bb789dad73a5fe70549840dc3707/basics/math-quiz)]
+-[[math-quiz](https://github.com/Hossamgholam/CPP-Core-Concepts-Projects/tree/8b21c2edfeb2bb789dad73a5fe70549840dc3707/basics/)]
 The projects demonstrate:
 
 - Structured programming practices  
