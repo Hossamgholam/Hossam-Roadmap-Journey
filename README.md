@@ -9,13 +9,13 @@
 
 ## 📌 About This Repository
 
-This repository represents my complete programming journey —  
+This repository represents my complete programming journey 
 from computer science fundamentals to backend development and system design.
 
 It is not just a collection of code.  
 It is a **structured roadmap** documenting what I studied, understood, and implemented.
 
-The goal is to build deep technical understanding step by step —  
+The goal is to build deep technical understanding step by step 
 not just write code, but understand how systems work internally.
 
 ---
@@ -79,19 +79,7 @@ That’s why every course includes:
 
 ---
 
-# 🔥 How This Supports My Backend Journey
 
-Understanding:
-
-- How data travels (TCP/IP, HTTP)
-- How servers communicate
-- How ports and sockets work
-- How 3-tier architecture separates concerns
-- How databases interact with applications
-
-Makes backend development much stronger and more structured.
-
----
 
 # 📈 Current Focus
 
@@ -117,4 +105,4 @@ I am always open to learning.
 
 ---
 
-## 🚀 This is not the end — this is an evolving journey.
+## 🚀 This is not the end  this is an evolving journey.
