@@ -1,0 +1,14 @@
+﻿  14-date library.cpp
+G:\universial\specialis\programing advice\cpp\10_oop\14-date library\14-date library\clsString.h(113,29): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '14-date%20library.cpp')
+  
+G:\universial\specialis\programing advice\cpp\10_oop\14-date library\14-date library\clsString.h(202,33): warning C4267: '=': conversion from 'size_t' to 'short', possible loss of data
+  (compiling source file '14-date%20library.cpp')
+  
+G:\universial\specialis\programing advice\cpp\10_oop\14-date library\14-date library\clsString.h(223,33): warning C4267: '=': conversion from 'size_t' to 'short', possible loss of data
+  (compiling source file '14-date%20library.cpp')
+  
+G:\universial\specialis\programing advice\cpp\10_oop\14-date library\14-date library\clsString.h(254,14): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '14-date%20library.cpp')
+  
+  14-date library.vcxproj -> G:\universial\specialis\programing advice\cpp\10_oop\14-date library\x64\Debug\14-date library.exe

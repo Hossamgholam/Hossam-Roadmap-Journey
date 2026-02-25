@@ -1,0 +1,4 @@
+﻿  calculator project.cpp
+C:\Users\DELL\Desktop\cpp\10_oop\calculator project\calculator project\calculator project.cpp(18,16): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+C:\Users\DELL\Desktop\cpp\10_oop\calculator project\calculator project\calculator project.cpp(42,27): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  calculator project.vcxproj -> C:\Users\DELL\Desktop\cpp\10_oop\calculator project\x64\Debug\calculator project.exe
