@@ -1,6 +1,6 @@
 # 📘 Algorithms & Problem Solving – Level 3 (C++)
 
-## 🧠 Overview
+##  Overview
 
 This course represents a major step in my programming journey.  
 After completing previous levels in algorithms and C++, this stage focused on **deep practice, structured thinking, and real programming maturity**.
@@ -13,7 +13,7 @@ I solved 51 programming problems with increasing difficulty and applied everythi
 
 ## 🔹 Core Areas Covered
 
-### 🧮 Matrix Operations
+###  Matrix Operations
 Implemented multiple utility functions for 2D arrays:
 
 - Fill matrix with random values
@@ -36,7 +36,7 @@ These exercises strengthened:
 
 ---
 
-### 🔤 Advanced String Manipulation
+###  Advanced String Manipulation
 
 Built a complete string utility module including:
 
@@ -65,7 +65,7 @@ These problems improved:
 
 ---
 
-### 📂 Record & Data Handling (Struct Simulation)
+###  Record & Data Handling (Struct Simulation)
 
 Implemented structured client records:
 
@@ -90,7 +90,7 @@ This simulates real-world database record processing.
 
 ---
 
-### 🛠 CRUD Operations Simulation
+###  CRUD Operations Simulation
 
 Implemented basic data management operations:
 
@@ -105,7 +105,7 @@ to building structured mini-systems.
 ---
 ---
 
-## 🚀 Projects Built During This Course
+##  Projects Built During This Course
 
 During this stage, I also built two practical console-based projects applying the same concepts learned here.
 
@@ -120,7 +120,7 @@ They reflect my transition from solving exercises to building complete applicati
 ---
 
 
-## 🚀 Skills Gained
+##  Skills Gained
 
 By the end of this course, I improved:
 
@@ -138,7 +138,7 @@ Most importantly:
 
 ---
 
-## 🎯 Conclusion
+##  Conclusion
 
 Algorithms Level 3 transformed accumulated knowledge  
 into real programming experience.

@@ -1,4 +1,4 @@
-# 📘 Introduction to Programming with C++ – Level 1  
+#  Introduction to Programming with C++ – Level 1  
 ## Personal Structured Notes
 
 This document represents my structured understanding of C++ fundamentals.
@@ -6,7 +6,7 @@ This is not random syntax collection — it is organized knowledge built on thin
 
 ---
 
-# 🧠 1️⃣ C++ Overview
+#  1️⃣ C++ Overview
 
 - Cross-platform language
 - Supports Procedural Programming
@@ -23,7 +23,7 @@ C++ is a tool to implement logic — not programming itself.
 
 ---
 
-# 🖥️ 2️⃣ Output & Buffering
+#  2️⃣ Output & Buffering
 
 Two main line-ending techniques:
 
@@ -34,7 +34,7 @@ Use `\n` when performance matters.
 
 ---
 
-# 🔤 3️⃣ Literals & Escape Sequences
+#  3️⃣ Literals & Escape Sequences
 
 ### Literal
 A literal is a fixed value stored directly in the program.
@@ -57,7 +57,7 @@ Used inside strings:
 
 ---
 
-# 🧩 4️⃣ Data Types
+#  4️⃣ Data Types
 
 ## A) Fundamental Types
 
@@ -119,7 +119,7 @@ unsigned long long
 
 ---
 
-# 🏷️ 5️⃣ Variable Naming Rules
+# 5️⃣ Variable Naming Rules
 
 Valid:
 - Letters
@@ -138,7 +138,7 @@ Invalid examples:
 
 ---
 
-# ➕ 6️⃣ Operators
+#  6️⃣ Operators
 
 ### Arithmetic
 +  -  *  /  %
@@ -154,7 +154,7 @@ Invalid examples:
 
 ---
 
-# 📐 7️⃣ Math Functions (`<cmath>`)
+#  7️⃣ Math Functions (`<cmath>`)
 
 ```cpp
 sqrt(x)
@@ -167,7 +167,7 @@ round(x)
 
 ---
 
-# 🧱 8️⃣ Structures
+#  8️⃣ Structures
 
 Used to group related variables.
 
@@ -198,7 +198,7 @@ Struct = foundation before OOP classes.
 
 ---
 
-# 🎨 9️⃣ Enum (Enumeration)
+#  9️⃣ Enum (Enumeration)
 
 Special type representing a set of constants.
 
@@ -216,7 +216,7 @@ Enum improves readability over raw integers.
 
 ---
 
-# 🔄 1️⃣0️⃣ Casting
+#  1️⃣0️⃣ Casting
 
 ## Implicit
 Automatic conversion.
@@ -238,7 +238,7 @@ to_string()
 
 ---
 
-# 🧵 1️⃣1️⃣ String Handling
+#  1️⃣1️⃣ String Handling
 
 Important operations:
 
@@ -260,7 +260,7 @@ getline(cin, name);
 
 ---
 
-# 🧮 1️⃣2️⃣ Functions
+#  1️⃣2️⃣ Functions
 
 Two main types:
 
@@ -272,7 +272,7 @@ Returns value (int, double, etc.)
 
 ---
 
-## 🔐 Scope
+##  Scope
 
 ### Local Variable
 Defined inside function.
@@ -283,7 +283,7 @@ Accessed using `::`
 
 ---
 
-## 📦 Passing Parameters
+##  Passing Parameters
 
 ### Pass By Value
 - Creates copy
@@ -301,7 +301,7 @@ void changeValue(int &x) {
 
 ---
 
-# 🔁 1️⃣3️⃣ Loops
+#  1️⃣3️⃣ Loops
 
 ### for Loop
 Used when number of repetitions is known.
@@ -316,7 +316,7 @@ Nested loops used for:
 
 ---
 
-# 🗃️ 1️⃣4️⃣ Arrays
+#  1️⃣4️⃣ Arrays
 
 ```cpp
 int arr[10];
@@ -334,7 +334,7 @@ for(int i = 0; i < size; i++) {
 
 ---
 
-# 🧠 Final Understanding
+#  Final Understanding
 
 This course built:
 

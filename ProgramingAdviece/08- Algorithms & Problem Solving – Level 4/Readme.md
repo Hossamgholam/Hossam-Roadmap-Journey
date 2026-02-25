@@ -1,6 +1,6 @@
-# 📘 Algorithms & Problem Solving – Level 4 (C++)
+#  Algorithms & Problem Solving – Level 4 (C++)
 
-## 🧠 Overview
+##  Overview
 
 This course represents advanced-scale algorithmic practice.
 
@@ -29,11 +29,11 @@ Unlike previous levels, this course emphasized:
 
 ---
 
-## 🗓 Major Implementation: Date & Period Engine
+##  Major Implementation: Date & Period Engine
 
 One of the most advanced parts of this level was building a full `clsDate` system including:
 
-### 🔸 Date Core Features
+###  Date Core Features
 
 - Detect leap year
 - Get number of:
@@ -47,7 +47,7 @@ One of the most advanced parts of this level was building a full `clsDate` syste
 
 ---
 
-### 🔸 Date Comparison Logic
+###  Date Comparison Logic
 
 - Check if date1 is before date2
 - Check equality
@@ -57,7 +57,7 @@ One of the most advanced parts of this level was building a full `clsDate` syste
 
 ---
 
-### 🔸 Date Arithmetic (Increase / Decrease)
+###  Date Arithmetic (Increase / Decrease)
 
 Implemented full date manipulation system:
 
@@ -82,7 +82,7 @@ This required careful handling of:
 
 ---
 
-### 🔸 Business Logic Calculations
+###  Business Logic Calculations
 
 - Calculate difference in days between two dates
 - Calculate age in days
@@ -95,7 +95,7 @@ This required careful handling of:
 
 ---
 
-### 🔸 Period Handling
+###  Period Handling
 
 Implemented period-based logic:
 
@@ -107,7 +107,7 @@ This simulates real-world scheduling and HR-style systems.
 
 ---
 
-### 🔸 Input Validation Utilities
+###  Input Validation Utilities
 
 Built reusable input functions:
 
@@ -120,7 +120,7 @@ This strengthened defensive programming practices.
 
 ---
 
-## 🚀 Skills Gained
+##  Skills Gained
 
 By completing Level 4, I improved:
 
@@ -139,7 +139,7 @@ Most importantly:
 
 ---
 
-## 🎯 Course Outcome
+##  Course Outcome
 
 Algorithms Level 4 transformed practice into real programming maturity.
 

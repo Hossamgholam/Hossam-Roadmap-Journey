@@ -21,6 +21,7 @@ This course introduces C++ not as “programming itself”, but as a powerful to
 The focus is not memorizing syntax.  
 The focus is understanding how logic becomes implementation.
 
+---
 
 🔐 Course Philosophy
 
@@ -33,6 +34,7 @@ This course is built on the belief that:
 - Strong fundamentals create strong programmers.
 - Discipline beats shortcuts.
 
+---
 
 📖 What This Course Builds
 
@@ -48,6 +50,7 @@ By completing this course, I developed the ability to:
 - Understand beginner-level memory concepts
 - Translate problem-solving thinking into structured C++ code
 
+---
 
 🧱 Structural Progression
 
@@ -64,6 +67,7 @@ This course was studied in a gradual and disciplined manner:
 
 Each concept builds on previous foundations — no random learning.
 
+---
 
 🎯 Learning Outcome
 

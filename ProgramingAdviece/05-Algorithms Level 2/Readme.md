@@ -2,7 +2,7 @@
 
 ---
 
-## 📌 Course Overview
+##  Course Overview
 
 In this course, I solved 50 algorithmic and mathematical problems using C++.
 
@@ -19,7 +19,7 @@ This course represents a shift from writing standalone solutions to building reu
 
 ---
 
-## 🧠 What I Learned
+##  What I Learned
 
 ### 1️⃣ Translating Logic into Structured Code
 
@@ -95,7 +95,7 @@ Implemented a simple character-shift encryption/decryption system to practice:
 
 ---
 
-## 🏗 Design Approach
+##  Design Approach
 
 While solving the problems, I focused on structuring the code professionally:
 
@@ -109,13 +109,13 @@ This stage marks my transition from solving isolated exercises to building struc
 
 ---
 
-## 🚀 Projects Built During This Course
+##  Projects Built During This Course
 
 During this stage, I also built two practical console-based projects applying the same concepts learned here.
 
 These projects are available in a separate repository:
 
-🔗 **Core Concepts Projects (C++)**  
+ **Core Concepts Projects (C++)**  
 - [[math-quiz](https://github.com/Hossamgholam/CPP-Core-Concepts-Projects/tree/8b21c2edfeb2bb789dad73a5fe70549840dc3707/basics/math-quiz)]
 - [[math-quiz](https://github.com/Hossamgholam/CPP-Core-Concepts-Projects/tree/8b21c2edfeb2bb789dad73a5fe70549840dc3707/basics/rock-paper-scissors))]
 
@@ -123,7 +123,7 @@ They reflect my transition from solving exercises to building complete applicati
 
 ---
 
-## 🎯 Key Outcome
+##  Key Outcome
 
 After completing this course, I am able to:
 
@@ -135,7 +135,7 @@ After completing this course, I am able to:
 
 ---
 
-## 📍 Position in My Learning Journey
+##  Position in My Learning Journey
 
 This course is part of my **C++ Core Concepts Journey** and represents the stage where:
 

@@ -1,6 +1,6 @@
 # 04 – Advanced Problem Solving – Level 1
 
-## 📌 Course Overview
+##  Course Overview
 
 In this course, I revisited the 50 algorithmic problems from the previous Algorithms course, but this time I solved them using C++.
 
@@ -13,7 +13,7 @@ The goal was not learning new syntax — but improving:
 
 ---
 
-## 🧠 What Improved in This Course
+##  What Improved in This Course
 
 - Writing cleaner structured solutions
 - Breaking complex problems into smaller functions
@@ -23,7 +23,7 @@ The goal was not learning new syntax — but improving:
 
 ---
 
-## 🔁 Difference from Previous Courses
+##  Difference from Previous Courses
 
 Algorithms Level 1:
 - Thinking without code
@@ -37,7 +37,7 @@ Advanced Problem Solving:
 
 ---
 
-## 🎯 Key Outcome
+##  Key Outcome
 
 This course strengthened my ability to:
 

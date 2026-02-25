@@ -1,6 +1,6 @@
 # Algorithms & Problem Solving – Level 1
 
-## 📌 Course Objective
+##  Course Objective
 
 This course focuses entirely on building algorithmic thinking before learning any programming language.
 
@@ -12,7 +12,7 @@ The goal is to learn how to:
 
 ---
 
-## 🧠 Core Concepts Learned
+##  Core Concepts Learned
 
 - What is an Algorithm?
 - Input → Process → Output model
@@ -23,7 +23,7 @@ The goal is to learn how to:
 
 ---
 
-## 🔍 Problem Solving Framework I Learned
+##  Problem Solving Framework I Learned
 
 For every problem, I follow this structure:
 
@@ -36,7 +36,7 @@ For every problem, I follow this structure:
 
 ---
 
-## 🏗️ Structure of Practice
+##  Structure of Practice
 
 This course includes 50 carefully selected problems focused on:
 
@@ -51,7 +51,7 @@ Only structured thinking and flowcharts.
 
 ---
 
-## 🎯 What I Gained
+##  What I Gained
 
 - Strong logical thinking foundation
 - Ability to analyze problems before coding
