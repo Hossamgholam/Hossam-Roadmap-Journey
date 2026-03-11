@@ -247,15 +247,20 @@ BankManagementSystem
 
 ---
 
-### Client List
-
-![Client List](screenshots/client-list.png)
-
----
 
 ### Transactions
 
 ![Transactions](screenshots/transactions.png)
+
+---
+### user List
+
+![User List](screenshots/user-list.png)
+
+---
+### currency Exchange List
+
+![currency list](screenshots/currency-list.png)
 
 ---
 
