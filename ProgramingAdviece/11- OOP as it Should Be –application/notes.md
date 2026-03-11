@@ -1,179 +1,139 @@
-# Bank Management System
+# 🏦 Bank Management System (C++)
 
-## Project Overview
+![C++](https://img.shields.io/badge/Language-C%2B%2B-blue)
+![OOP](https://img.shields.io/badge/Paradigm-OOP-green)
+![Platform](https://img.shields.io/badge/Platform-Console-lightgrey)
+![Storage](https://img.shields.io/badge/Storage-Text%20Files-orange)
+![Status](https://img.shields.io/badge/Project-Completed-success)
 
-This project is a **Console Bank Management System written in C++ using Object-Oriented Programming (OOP)**.
+A **Console Bank Management System** developed using **C++ and Object-Oriented Programming (OOP)**.
 
-The system simulates a simple banking environment where users can:
-
-- Manage bank clients
-- Perform financial transactions
-- Manage system users
-- Track login activity
-- Track transfer operations
-- Exchange currencies
-
-The system uses **text files as a simple database** to store data.
+The project simulates a simple banking environment where administrators can manage clients, perform financial transactions, manage system users, and track system activity logs.
 
 ---
 
-# Project Architecture
+# 🚀 Features
 
-The system follows a **layered architecture** to separate responsibilities and make the project easier to understand.
+### Client Management
+
+* Add new clients
+* Update client information
+* Delete clients
+* Find clients
+* List all clients
+
+### Transactions
+
+* Deposit money
+* Withdraw money
+* Transfer money between clients
+* Calculate total bank balances
+
+### User Management
+
+* Add new users
+* Update users
+* Delete users
+* Permission-based access control
+
+### Logs
+
+* Login register history
+* Transfer log history
+
+### Currency Exchange
+
+* Currency conversion system
+
+---
+
+# 🏗️ Project Architecture
+
+The system is designed using a **layered architecture**.
 
 ```
 Bank Management System
 │
 ├── UI Layer (Screens)
-│
 ├── Business Logic Layer
-│
 ├── Utility Classes
-│
 └── Data Storage (Text Files)
 ```
 
 ---
 
-# 1. UI Layer (Screens)
-
-This layer is responsible for **interacting with the user**.
-
-All screens inherit from a base class called `clsScreen`.
+# 🏗️ System Architecture Diagram
 
 ```
-clsScreen
-│
-├── clsShowLoginScreen
-├── clsMainScreen
-│
-├── Client Screens
-│   ├── clsClientListScreen
-│   ├── clsAddNewClientScreen
-│   ├── clsDeleteClientScreen
-│   ├── clsUpdateClientScreen
-│   └── clsFindClientScreen
-│
-├── Transaction Screens
-│
-├── User Management Screens
-│
-├── Login Register Screen
-│
-└── Currency Exchange Screen
-```
-
-### Responsibilities
-
-- Display menus
-- Receive user input
-- Call business logic classes
-- Check user permissions
-
----
-
-# 2. Business Logic Layer
-
-This layer contains the **core system logic**.
-
-```
-clsPerson
-   │
-   ├── clsBankClient
-   │
-   └── clsUser
+User
+ │
+ ▼
+UI Screens
+(clsScreen and derived classes)
+ │
+ ▼
+Business Logic
+(clsBankClient, clsUser, clsPerson)
+ │
+ ▼
+Utility Classes
+(clsString, clsDate, clsUtil, clsInputValidate)
+ │
+ ▼
+Data Storage
+(Text Files)
 ```
 
 ---
+
+# 🧠 Business Logic Classes
 
 ## clsPerson
 
-Base class that stores **basic personal information**.
+Base class representing general person information.
 
 ```
-firstName
-lastName
-email
-phone
+FirstName
+LastName
+Email
+Phone
 ```
-
-Both **clients and system users inherit from it**.
 
 ---
 
 ## clsBankClient
 
-Represents a **bank account client**.
+Represents a bank client.
 
-### Properties
+Main operations:
 
-```
-Account Number
-Pin Code
-Account Balance
-```
-
-### Main Operations
-
-```
-Find Client
-Add Client
-Update Client
-Delete Client
-Deposit
-Withdraw
-Transfer
-Get Total Bank Balance
-```
-
-### Transfer Logging
-
-Each transfer operation is stored in:
-
-```
-TransferLog.txt
-```
-
-Stored data:
-
-```
-Date
-Source Account
-Destination Account
-Amount
-Source Balance
-Destination Balance
-User Name
-```
+* Find client
+* Add client
+* Update client
+* Delete client
+* Deposit
+* Withdraw
+* Transfer
+* Get total balances
 
 ---
 
 ## clsUser
 
-Represents a **system user who can log into the system**.
+Represents a system user.
 
-### Properties
+Responsibilities:
 
-```
-UserName
-Password
-Permissions
-```
-
-### Responsibilities
-
-```
-Authentication (Login)
-Authorization (Permissions)
-User Management
-Login Logging
-```
+* Login authentication
+* Permission control
+* User management
+* Login activity logging
 
 ---
 
-# Permission System
+# 🔐 Permission System
 
-The system uses a **bitmask permission system**.
+The system uses **bitmask permissions** to control access.
 
 Example permissions:
 
@@ -188,13 +148,13 @@ Manage Users
 Login Register
 ```
 
-Each user may have **different access rights**.
+Each user may have different access rights.
 
 ---
 
-# 3. Utility Classes
+# 🛠 Utility Classes
 
-These classes provide **helper functions used across the system**.
+Helper classes used across the system.
 
 ```
 clsString
@@ -203,38 +163,24 @@ clsUtil
 clsInputValidate
 ```
 
-### Examples
+Examples:
 
-**clsString**
-
-```
-Split strings
-String manipulation
-```
-
-**clsDate**
-
-```
-Get system date
-Format date
-```
-
-**clsInputValidate**
-
-```
-Validate user input
-Ensure numbers are within range
-```
+* String splitting
+* Date formatting
+* Input validation
+* Random generation
 
 ---
 
-# 4. Data Storage
+# 💾 Data Storage
 
-The system uses **text files instead of a database**.
+The system uses **text files as a simple database**.
+
+Files used:
 
 ```
-clients.txt
-users.txt
+Clients.txt
+Users.txt
 TransferLog.txt
 LoginRegister.txt
 ```
@@ -255,96 +201,65 @@ Ali#//#Hassan#//#ali@mail.com#//#012345#//#A100#//#1234#//#5000
 
 ---
 
-## Users File Format
+# 📁 Project Structure
 
 ```
-FirstName#//#LastName#//#Email#//#Phone#//#UserName#//#Password#//#Permission
-```
-
----
-
-## Transfer Log Format
-
-```
-DateTime#//#SourceAccount#//#DestinationAccount#//#Amount#//#SourceBalance#//#DestinationBalance#//#UserName
-```
-
----
-
-## Login Register Format
-
-```
-DateTime#//#UserName#//#EncryptedPassword#//#Permissions
-```
-
----
-
-# System Flow
-
-```
-Program Start
-      │
-      ▼
-Login Screen
-      │
-      ▼
-User Authentication
-      │
-      ▼
-Main Menu
-      │
-      ├── Client Management
-      │
-      ├── Transactions
-      │
-      ├── User Management
-      │
-      ├── Login Register
-      │
-      └── Currency Exchange
+BankManagementSystem
+│
+├── Screens
+│   ├── clsScreen.h
+│   ├── clsMainScreen.h
+│   ├── clsShowLoginScreen.h
+│
+├── Core Classes
+│   ├── clsPerson.h
+│   ├── clsBankClient.h
+│   ├── clsUser.h
+│
+├── Utilities
+│   ├── clsString.h
+│   ├── clsDate.h
+│   ├── clsUtil.h
+│   ├── clsInputValidate.h
+│
+├── Data Files
+│   ├── Clients.txt
+│   ├── Users.txt
+│   ├── TransferLog.txt
+│   ├── LoginRegister.txt
+│
+└── main.cpp
 ```
 
 ---
 
-# Security Features
+# 📸 System Screenshots
 
-```
-User Authentication
-Permission-Based Access Control
-Maximum Login Attempts (3)
-Login History Logging
-Transfer Operation Logging
-```
+### Login Screen
+
+![Login](screenshots/login.png)
 
 ---
 
-# Main Features
+### Main Menu
 
-```
-Client Management
-Add / Update / Delete Clients
-Search Clients
-
-Transactions
-Deposit
-Withdraw
-Transfer
-Total Balance Calculation
-
-User Management
-Add / Update / Delete Users
-Permission System
-
-Logs
-Login Register
-Transfer History
-
-Currency Exchange
-```
+![Main Menu](screenshots/main-menu.png)
 
 ---
 
-# Technologies Used
+### Client List
+
+![Client List](screenshots/client-list.png)
+
+---
+
+### Transactions
+
+![Transactions](screenshots/transactions.png)
+
+---
+
+# 🧰 Technologies Used
 
 ```
 C++
@@ -353,3 +268,16 @@ File Handling
 STL (vector, string)
 Console Application
 ```
+
+---
+
+# 👨‍💻 Author
+
+**Hossam El-Side Salim Gholam**
+
+Computer Science Student
+Backend Development Path (.NET)
+
+---
+
+⭐ If you find this project useful, feel free to star the repository.
