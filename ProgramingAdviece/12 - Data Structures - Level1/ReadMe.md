@@ -8,16 +8,16 @@ This is the **twelfth course** in my programming journey.
 
 Before reaching this stage, I completed the following foundations:
 
- 1️⃣ Programming Foundations – Level 1
- 2️⃣ Algorithms & Problem Solving – Level 1
- 3️⃣ Introduction to Programming with C++ – Level 1
- 4️⃣ Algorithms & Problem Solving – Level 1 (Clean Code Solutions)
- 5️⃣ Algorithms & Problem Solving – Level 2
- 6️⃣ Introduction to Programming Using C++ – Level 2
- 7️⃣ Algorithms & Problem Solving – Level 3
- 8️⃣ Algorithms & Problem Solving – Level 4
- 9️⃣ Foundations – Level 2
- 🔟 OOP as it Should Be – Concepts
+ 1️⃣ Programming Foundations – Level 1  
+2️⃣ Algorithms & Problem Solving – Level 1  
+3️⃣ Introduction to Programming with C++ – Level 1  
+4️⃣ Algorithms & Problem Solving – Level 1 (Clean Code Solutions)  
+5️⃣ Algorithms & Problem Solving – Level 2  
+6️⃣ Introduction to Programming Using C++ – Level 2  
+7️⃣ Algorithms & Problem Solving – Level 3  
+8️⃣ Algorithms & Problem Solving – Level 4  
+9️⃣ Foundations – Level 2  
+🔟 OOP as it Should Be – Concepts  
  1️⃣1️⃣ OOP as it Should Be – Applications
 
 At this point in the roadmap, programming is no longer only about writing correct code.
