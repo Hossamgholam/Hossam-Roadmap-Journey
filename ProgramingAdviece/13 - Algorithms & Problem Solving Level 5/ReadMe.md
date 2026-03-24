@@ -21,7 +21,7 @@ Before reaching this stage, I completed the following:
   9️⃣ Foundations – Level 2  
   🔟 OOP as it Should Be – Concepts  
   1️⃣1️⃣ OOP as it Should Be – Applications
-  12. Data Structures – Level 1  
+  1️⃣1️⃣ Data Structures – Level 1  
 
 At this point in the roadmap, I already:
 
