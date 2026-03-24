@@ -1,70 +1,74 @@
-🧪 Practice & Implementation – Course 13
+# 🧪 Practice & Implementation – Course 13  
 
 This section contains practical implementations of core data structures built from scratch.
 
-The goal was not just usage — but full understanding of how they work internally.
+The goal is full understanding, not just usage.
 
-🧱 Implemented Structures
+---
 
-🔹 Doubly Linked List
-• Insert (Beginning, End, After)
-• Delete (Node, First, Last)
-• Find
-• Reverse
-• Size & Traversal
+## 🧱 Implemented Structures  
 
-🔹 Dynamic Array
-• Resize
-• Insert / Delete
-• Reverse
-• Search
-• Index-based operations
+### 🔹 Doubly Linked List  
+- Insert (Beginning, End, After)  
+- Delete (Node, First, Last)  
+- Find  
+- Reverse  
+- Size & Traversal  
 
-🔹 Stack (LIFO)
-• Push / Pop
-• Top / Bottom
-• Reverse
-• Array & Linked List implementations
+### 🔹 Dynamic Array  
+- Resize  
+- Insert / Delete  
+- Reverse  
+- Search  
+- Index operations  
 
-🔹 Queue (FIFO)
-• Push / Pop
-• Front / Back
-• Reverse
-• Array & Linked List implementations
+### 🔹 Stack (LIFO)  
+- Push / Pop  
+- Top / Bottom  
+- Reverse  
+- Array & Linked List implementations  
 
-🔹 Custom String System
-• Value tracking
-• Undo / Redo functionality
-• Simulates real editor behavior
+### 🔹 Queue (FIFO)  
+- Push / Pop  
+- Front / Back  
+- Reverse  
+- Array & Linked List implementations  
 
-🔹 Queue Line System
-• Ticket issuing system
-• Simulates real-world service queues
-• Supports:
+### 🔹 Custom String System  
+- Value tracking  
+- Undo / Redo  
+- Simulates editor behavior  
 
-* Issue ticket
-* Serve next client
-* Display queue (LTR & RTL)
-* Show system info
+### 🔹 Queue Line System  
+- Ticket issuing  
+- Serve next client  
+- Display queue (LTR & RTL)  
+- System info  
 
-🧠 Key Learning Focus
+---
 
-• Understanding internal implementation of data structures
-• Comparing different implementations (Array vs Linked List)
-• Practicing real operations (insert, delete, update, search)
-• Applying composition and inheritance
-• Building reusable and extendable classes
+## 🧠 Key Learning Focus  
 
-📌 Notes
+- Understanding internal implementation  
+- Comparing Array vs Linked List  
+- Practicing real operations  
+- Applying composition and inheritance  
+- Building reusable classes  
 
-All implementations were tested inside `main()` using multiple scenarios.
+---
 
-The goal was:
+## 📌 Notes  
 
-👉 Not just making it work
-👉 But understanding how and why it works
+All implementations were tested inside `main()`.
 
-🚀 Final Thought
+Goal:
+
+👉 Not just making it work  
+👉 But understanding how it works  
+
+---
+
+## 🚀 Final Thought  
 
 This practice represents the transition from:
 
