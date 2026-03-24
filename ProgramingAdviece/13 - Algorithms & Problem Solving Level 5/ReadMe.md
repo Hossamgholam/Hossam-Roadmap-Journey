@@ -10,18 +10,18 @@ This is the **thirteenth course** in my programming journey.
 
 Before reaching this stage, I completed the following:
 
-1. Programming Foundations – Level 1  
-2. Algorithms & Problem Solving – Level 1  
-3. Introduction to Programming with C++ – Level 1  
-4. Algorithms & Problem Solving – Level 1 (Clean Code Solutions)  
-5. Algorithms & Problem Solving – Level 2  
-6. Introduction to Programming Using C++ – Level 2  
-7. Algorithms & Problem Solving – Level 3  
-8. Algorithms & Problem Solving – Level 4  
-9. Foundations – Level 2  
-10. OOP as it Should Be – Concepts  
-11. OOP as it Should Be – Applications  
-12. Data Structures – Level 1  
+  1️⃣ Programming Foundations – Level 1  
+  2️⃣ Algorithms & Problem Solving – Level 1  
+  3️⃣ Introduction to Programming with C++ – Level 1  
+  4️⃣ Algorithms & Problem Solving – Level 1 (Clean Code Solutions)  
+  5️⃣ Algorithms & Problem Solving – Level 2  
+  6️⃣ Introduction to Programming Using C++ – Level 2  
+  7️⃣ Algorithms & Problem Solving – Level 3  
+  8️⃣ Algorithms & Problem Solving – Level 4  
+  9️⃣ Foundations – Level 2  
+  🔟 OOP as it Should Be – Concepts  
+  1️⃣1️⃣ OOP as it Should Be – Applications
+  12. Data Structures – Level 1  
 
 At this point in the roadmap, I already:
 
