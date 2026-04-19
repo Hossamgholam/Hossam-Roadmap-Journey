@@ -66,9 +66,9 @@ The choice is intentional:
 ## 🏗️ Practice
 
 Built real applications like:
+- [Pizza App](Practice/pizza-project)
 
-- [Pizza App]  (Practice/pizza project)
-- [Tic-Tac-Toe]  (Practice/tic tac to)
+- [Tic-Tac-Toe](Practice/tic-tac-to)
 
 
 ---
