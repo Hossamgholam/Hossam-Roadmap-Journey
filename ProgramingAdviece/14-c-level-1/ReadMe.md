@@ -67,8 +67,16 @@ The choice is intentional:
 
 Built real applications like:
 - [Pizza App](Practice/pizza-project)
+<p align="center">
+  <img src="images/pizza-app.png" width="500"/>
+</p>
 
 - [Tic-Tac-Toe](Practice/tic-tac-to)
+<p align="center">
+  <img src="images/tic-tac-toe.png" width="500"/>
+</p>
+## 🖼️ Practice Preview
+
 
 
 ---
