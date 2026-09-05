@@ -1,193 +1,250 @@
-# 18 - C# & Database Connectivity (ADO.NET)
+# Course 18 — C# & Database Connectivity (ADO.NET)
 
-## 📚 Course Overview
+> **Programming Advices Roadmap**
 
-This course focuses on connecting C# applications to SQL Server databases using **ADO.NET** and applying database operations through a structured **Data Access Layer (DAL)** and **Business Layer (BLL)**.
+## Overview
 
-It is an important step in the roadmap because it moves from learning SQL and database design to actually building C# code that can communicate with, retrieve, insert, update, and delete real database data.
+This course introduces **ADO.NET** as the foundation for connecting C# applications to **SQL Server** databases.
+
+The practical work progresses from direct database access using ADO.NET to a more structured application design using a **Data Access Layer (DAL)** and **Business Layer (BLL)**. The course focuses on retrieving and manipulating data, executing parameterized SQL commands, mapping database records to C# models, and separating database responsibilities from business logic.
 
 ---
 
-## 🎯 What I Learned
+## Learning Objectives
 
-### 1. ADO.NET Database Connectivity
+By completing this course, the following concepts and skills were practiced:
 
-- Understanding how C# applications communicate with SQL Server.
-- Using `SqlConnection` to establish a database connection.
-- Opening and closing connections correctly.
-- Using `SqlCommand` to execute SQL statements.
-- Working with connection strings.
+- Establishing database connectivity from C# applications.
+- Executing SQL commands from C#.
+- Retrieving and processing database records.
+- Using parameterized SQL queries.
+- Implementing CRUD operations.
+- Working with `SqlDataReader` and `DataTable`.
+- Retrieving single values with `ExecuteScalar()`.
+- Retrieving generated identity values using `SCOPE_IDENTITY()`.
+- Mapping database records to C# models.
+- Separating database access from business logic.
+- Designing reusable Data Access Layer methods.
+- Managing object state for Add/Update operations.
+- Applying constructors and encapsulation in business objects.
+- Handling database exceptions and connection resources.
 
-### 2. Reading Data with `SqlDataReader`
+---
 
-- Using `ExecuteReader()` to retrieve multiple rows.
-- Moving through returned records with `Read()`.
-- Checking whether results exist with `HasRows`.
-- Accessing column values by index and column name.
-- Handling database `NULL` values with `IsDBNull()`.
+## Core ADO.NET Concepts
 
-### 3. Parameterized Queries
+### Database Connection
 
-- Passing values to SQL queries through parameters.
-- Using parameters such as `@ID`, `@FirstName`, and `@CountryID`.
-- Understanding the importance of parameterized queries instead of directly concatenating user input into SQL statements.
-- Building queries with multiple parameters.
+Implemented SQL Server connectivity using:
 
-### 4. Searching with SQL `LIKE`
+- `SqlConnection`
+- Connection strings
+- `Open()` / `Close()`
+- `try / catch / finally`
 
-Practiced parameterized searches for:
+### SQL Command Execution
 
-- Names that **start with** a specific value.
-- Names that **end with** a specific value.
-- Names that **contain** a specific value.
+Practiced the three primary command execution methods:
 
-### 5. Executing Different Types of SQL Commands
-
-Learned when to use:
-
-| Method | Purpose |
+| Method | Usage |
 |---|---|
-| `ExecuteReader()` | Retrieve multiple rows of data |
+| `ExecuteReader()` | Retrieve multiple rows from the database |
 | `ExecuteScalar()` | Retrieve a single value |
-| `ExecuteNonQuery()` | Execute `INSERT`, `UPDATE`, and `DELETE` commands |
+| `ExecuteNonQuery()` | Execute `INSERT`, `UPDATE`, and `DELETE` statements |
 
-### 6. Retrieving a Single Value with `ExecuteScalar()`
+### Data Retrieval
 
-- Using `ExecuteScalar()` when only one value is required.
-- Retrieving a contact's first name by ID.
-- Converting the returned `object` into the required C# type.
+Used `SqlDataReader` to:
 
-### 7. CRUD Operations
+- Iterate through result sets with `Read()`.
+- Check for returned records with `HasRows`.
+- Access values by column name or index.
+- Handle database `NULL` values with `IsDBNull()`.
 
-Implemented database operations for Contacts and Countries:
+---
 
-- **Create** — Insert new records.
-- **Read** — Find one record or retrieve all records.
-- **Update** — Modify existing records.
-- **Delete** — Remove records.
-- **Exists** — Check whether a record exists.
+## Parameterized Queries
 
-### 8. Returning the Newly Created ID
+Implemented parameterized SQL commands using parameters such as:
 
-Learned how to retrieve the generated identity value after inserting a record using:
+- `@ID`
+- `@FirstName`
+- `@CountryID`
 
-```sql
-SELECT SCOPE_IDENTITY();
-```
+Parameterized queries were also used with SQL `LIKE` to implement:
 
-This allows the application to update the business object with the database-generated ID.
+- Starts-with searches.
+- Ends-with searches.
+- Contains searches.
+- Multiple search conditions.
 
-### 9. Working with `DataTable`
+This establishes a safer and more maintainable approach to passing application values to SQL commands.
 
-- Loading query results into a `DataTable`.
-- Returning a `DataTable` from the Data Access Layer.
-- Understanding when a tabular in-memory representation is useful for displaying database data.
+---
 
-### 10. Mapping Database Data to C# Objects
+## CRUD Operations
 
-Practiced converting database records into C# models/structures instead of keeping database access code mixed with presentation logic.
+Database operations were implemented for the Contacts and Countries entities.
 
-For example:
+| Operation | Implementation |
+|---|---|
+| **Create** | Insert new records and retrieve generated IDs |
+| **Read** | Find individual records and retrieve collections |
+| **Update** | Modify existing records |
+| **Delete** | Remove existing records |
+| **Exists** | Check whether a record exists |
+
+For inserts, `SCOPE_IDENTITY()` was used to retrieve the newly generated database identity value.
+
+---
+
+## Data Mapping
+
+Database records were mapped into C# models before being passed to the business layer.
+
+Examples include:
 
 - `StContactModel`
 - `StCountryModel`
 - `ClsContact`
 - `ClsCountry`
 
-### 11. Data Access Layer (DAL)
-
-Created a dedicated layer responsible for communicating with SQL Server.
-
-The Data Access Layer contains methods such as:
-
-- `FindContactById()`
-- `AddNewContact()`
-- `UpdateContact()`
-- `DeleteContact()`
-- `GetAllContact()`
-- `IsExsit()`
-- `FindByID()`
-- `FindByname()`
-
-This helped me understand the importance of keeping database communication separate from business logic.
-
-### 12. Business Layer (BLL)
-
-Created business classes that represent application entities and communicate with the DAL.
-
-The business layer handles operations such as:
-
-- Finding contacts and countries.
-- Creating new objects.
-- Saving new records.
-- Updating existing records.
-- Deleting records.
-- Checking whether records exist.
-
-### 13. Add / Update Object State
-
-Practiced using an internal mode such as:
-
-```text
-AddNew
-Update
-```
-
-The object can therefore determine whether `Save()` should insert a new record or update an existing one.
-
-### 14. Constructors for Object State
-
-Applied different constructors for different object states:
-
-- A public constructor for creating a new object.
-- A private constructor for creating an object that already exists in the database.
-
-This strengthened my understanding of constructors, object state, and encapsulation in real applications.
-
-### 15. Exception Handling and Resource Management
-
-- Using `try / catch / finally` around database operations.
-- Closing database connections after operations.
-- Returning meaningful success/failure results from DAL methods.
+This approach provides a clear boundary between raw database data and application-level objects.
 
 ---
 
-## 🏗️ Course Structure
+## Layered Architecture
 
-The course currently contains practical C# projects demonstrating ADO.NET database connectivity and a layered approach:
+A major part of the course was moving from direct ADO.NET operations toward a layered structure.
 
 ```text
-18 - C# & Database Connectivity (ADO.NET)
-│
-├── ADORetrieveData
-│   └── Basic ADO.NET database operations
-│
-└── Contact-based DAL / BLL implementation
-    ├── ContactDataAccessLayer
-    └── ContactBussinesLayer
+┌─────────────────────────┐
+│      Application        │
+└────────────┬────────────┘
+             │
+             ▼
+┌─────────────────────────┐
+│     Business Layer      │
+│          (BLL)          │
+└────────────┬────────────┘
+             │
+             ▼
+┌─────────────────────────┐
+│    Data Access Layer    │
+│          (DAL)          │
+└────────────┬────────────┘
+             │
+             ▼
+┌─────────────────────────┐
+│        ADO.NET          │
+└────────────┬────────────┘
+             │
+             ▼
+┌─────────────────────────┐
+│       SQL Server        │
+└─────────────────────────┘
 ```
 
-The practical work includes a Contacts/Countries database scenario and demonstrates how database operations can evolve from direct ADO.NET code into reusable Data Access and Business layers.
+### Data Access Layer (DAL)
+
+The DAL is responsible for communication with SQL Server.
+
+Examples of implemented operations include:
+
+```text
+FindContactById()
+AddNewContact()
+UpdateContact()
+DeleteContact()
+GetAllContact()
+IsExsit()
+FindByID()
+FindByname()
+```
+
+### Business Layer (BLL)
+
+The BLL provides application-level objects and operations while keeping database communication inside the DAL.
+
+The practical implementation includes:
+
+- `ClsContact`
+- `ClsCountry`
+- Find operations.
+- Save operations.
+- Update operations.
+- Delete operations.
+- Existence checks.
 
 ---
 
-## 🔧 Technologies & Concepts
+## Object State & Encapsulation
+
+The course also applied C# object-oriented concepts to database entities.
+
+An internal mode is used to distinguish between object states:
+
+```text
+AddNew → Create a new database record
+Update → Modify an existing database record
+```
+
+Different constructors are used to represent these states, including a public constructor for new objects and a controlled constructor for objects loaded from the database.
+
+The `Save()` operation can then determine whether the object should perform an **INSERT** or **UPDATE** operation.
+
+This provides a practical example of combining **OOP principles with database programming**.
+
+---
+
+## Practical Work
+
+The course includes practical implementations based on a **Contacts / Countries** database.
+
+### ADO.NET Retrieval Project
+
+**`ADORetrieveData`** demonstrates direct ADO.NET operations, including:
+
+- Retrieving all contacts.
+- Searching by first name.
+- Searching by first name and country.
+- Starts-with, ends-with, and contains searches.
+- Retrieving a single value with `ExecuteScalar()`.
+- Finding a single contact by ID.
+- Converting `SqlDataReader` results into a C# structure.
+
+### Contact Data Access & Business Layers
+
+The practical implementation was extended into separate layers:
+
+```text
+ContactDataAccessLayer
+        │
+        └── SQL Server communication
+
+ContactBussinesLayer
+        │
+        └── Business objects and operations
+```
+
+This demonstrates the transition from basic database connectivity to a reusable layered application structure.
+
+---
+
+## Technologies & Tools
 
 - **C#**
 - **ADO.NET**
 - **SQL Server**
-- **.NET Framework 4.7.2**
+- **.NET**
 - `SqlConnection`
 - `SqlCommand`
 - `SqlDataReader`
-- `ExecuteReader()`
-- `ExecuteScalar()`
-- `ExecuteNonQuery()`
 - `DataTable`
-- Parameterized SQL Queries
+- Parameterized SQL
 - SQL `LIKE`
 - `SCOPE_IDENTITY()`
-- CRUD Operations
+- CRUD
 - Data Access Layer (DAL)
 - Business Layer (BLL)
 - Object Mapping
@@ -195,34 +252,52 @@ The practical work includes a Contacts/Countries database scenario and demonstra
 
 ---
 
-## 🧠 Key Takeaway
+## Key Takeaways
 
-The main lesson from this course is understanding the complete path of data inside a C# application:
+The most important outcome of this course is understanding how a C# application communicates with a relational database and how that communication can be organized into maintainable layers.
+
+The progression can be summarized as:
 
 ```text
-C# Application
-      ↓
-Business Layer
-      ↓
-Data Access Layer
-      ↓
+SQL Queries
+     ↓
 ADO.NET
-      ↓
-SQL Server
+     ↓
+Data Access Layer
+     ↓
+Business Layer
+     ↓
+Application
 ```
 
-I learned that database programming is not only about writing SQL queries. It is also about designing a clean communication layer between the application and the database, handling results safely, separating responsibilities, and turning database records into usable C# objects.
-
-This course provided the foundation I needed to build the **Data Access Layer and Business Layer used later in the DVLD project**.
+This course established the database-access foundation used in larger C# applications and prepared the architecture and concepts needed for subsequent real-world projects, including the **DVLD project**.
 
 ---
 
-## 📌 Course Status
+## Course Status
 
-**Status:** ✅ Completed
+| Item | Details |
+|---|---|
+| **Course** | 18 — C# & Database Connectivity (ADO.NET) |
+| **Roadmap** | Programming Advices |
+| **Status** | Completed |
+| **Primary Technology** | C# / ADO.NET |
+| **Database** | SQL Server |
+| **Focus** | Database Connectivity, CRUD, DAL & BLL |
 
-**Course:** 18 - C# & Database Connectivity (ADO.NET)
+---
 
-**Roadmap:** Programming Advices
+## Repository Structure
 
-**Next Step:** Apply these database connectivity and layered architecture concepts in a larger real-world project.
+```text
+18 - C# & Database Connectivity (ADO.NET)
+│
+├── ADORetrieveData
+│   └── Direct ADO.NET practice
+│
+├── ContactDataAccessLayer
+│   └── Database access operations
+│
+└── ContactBussinesLayer
+    └── Business objects and operations
+```
