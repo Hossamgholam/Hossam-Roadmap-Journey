@@ -3426,7 +3426,7 @@ namespace DataSturctureLevel2
             //Console.WriteLine(BitArrayToString(bitXorResult));
 
 
-           
+
 
             #endregion
 
@@ -3454,7 +3454,7 @@ namespace DataSturctureLevel2
             // * 7 → Admin
             // *
             // */
-           
+
 
             //// Q1:
             //// Create a BitArray called permissions with 8 bits.
@@ -3579,7 +3579,7 @@ namespace DataSturctureLevel2
             //// Apply NOT to the copy.
             //// Print the original and the result.
             //Console.WriteLine(BitArrayToString(EmployeeA));
-           
+
             //Console.WriteLine("_______________________________");
             //BitArray BitNotResult = new BitArray(EmployeeA);
             //BitNotResult.Not();
@@ -3624,11 +3624,11 @@ namespace DataSturctureLevel2
             //// Department A permissions
             //// Department B permissions
             ////
-            
+
             //BitArray DepartmentA = new BitArray(new[] { true, true, false, true, false, true, false, false });
-            
+
             //BitArray DepartmentB = new BitArray(new[] { true, false, true, true, false, false, true, false });
-            
+
             //Console.WriteLine(BitArrayToString(DepartmentA));
             //Console.WriteLine(BitArrayToString(DepartmentB));
             //Console.WriteLine("_______________________________");
@@ -3679,7 +3679,7 @@ namespace DataSturctureLevel2
             //}
             //else
             //{
-                
+
             //    Permissions2[(int)EnPersmission.admin] = true;
             //    Permissions2[0]=false;
 
@@ -3779,25 +3779,605 @@ namespace DataSturctureLevel2
             #endregion
 
             #endregion
+
+            #region Lesson - Jagged Array
+
             /*
-             * is array of arrays with diffrent lenth
-             * */
+             * ==================== What is Jagged Array? ====================
+             *
+             * - A Jagged Array is an array of arrays.
+             * - Each inner array can have a different length.
+             *
+             * Example:
+             *
+             *      JaggedArray
+             *          ↓
+             *      ┌───────────────┐
+             *      │ 2  3  4  42 43│  ← length 5
+             *      ├───────────────┤
+             *      │ 1  2           │  ← length 2
+             *      ├───────────────┤
+             *      │ 4  5  5  34 322 64 45 │ ← length 7
+             *      └───────────────┘
+             *
+             *
+             * ==================== Important Characteristics ====================
+             *
+             * - Array of arrays.
+             * - The outer array has a fixed number of elements.
+             * - Each inner array can have a different length.
+             * - Each inner array can contain the same data type.
+             * - Zero-based indexing.
+             *
+             *
+             * ==================== Why use Jagged Array? ====================
+             *
+             * Use it when you have groups of data where
+             * each group can contain a different number of elements.
+             *
+             * Examples:
+             *
+             * - Students with different numbers of grades.
+             * - Employees with different numbers of projects.
+             * - Classes with different numbers of students.
+             * - Departments with different numbers of employees.
+             *
+             *
+             * ==================== Declaration ====================
+             *
+             * int[][] JaggedArray = new int[3][];
+             *
+             * Meaning:
+             *
+             * - Create an outer array with 3 elements.
+             * - Each element will later reference an inner int array.
+             *
+             *
+             * ==================== Think ====================
+             *
+             * Normal 2D Array:
+             *
+             *      int[,]
+             *
+             *      ┌─────┬─────┬─────┐
+             *      │     │     │     │
+             *      ├─────┼─────┼─────┤
+             *      │     │     │     │
+             *      └─────┴─────┴─────┘
+             *
+             * Every row has the same length.
+             *
+             *
+             * Jagged Array:
+             *
+             *      int[][]
+             *
+             *      ┌─────┬─────┬─────┬─────┬─────┐
+             *      │     │     │     │     │     │
+             *      └─────┴─────┴─────┴─────┴─────┘
+             *
+             *      ┌─────┬─────┐
+             *      │     │     │
+             *      └─────┴─────┘
+             *
+             *      ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┐
+             *      │     │     │     │     │     │     │     │
+             *      └─────┴─────┴─────┴─────┴─────┴─────┴─────┘
+             *
+             * Every inner array can have a different length.
+             */
 
-            //declaration and initialization
-            int[][] JaggedArray=new int[3][];
-            JaggedArray[0]=new int[] {2,3,4,42,43};
-            JaggedArray[1]=new int[] {1,2};
-            JaggedArray[2]=new int[] {4,5,5,34,322,64,45};
 
-            for (int i = 0; i<JaggedArray.Length; i++)
+            #region Coding
+
+            //// ============================================================
+            //// Declaration and Initialization
+            //// ============================================================
+
+            ///*new lesson make structru for this 
+            // * is array of arrays with diffrent lenth
+            // * */
+
+            ////declaration and initialization
+
+            //int[][] JaggedArray = new int[3][];
+
+            //JaggedArray[0] = new int[] { 2, 3, 4, 42, 43 };
+
+            //JaggedArray[1] = new int[] { 1, 2 };
+
+            //JaggedArray[2] = new int[] { 4, 5, 5, 34, 322, 64, 45 };
+
+
+            //// ============================================================
+            //// Print Jagged Array
+            //// ============================================================
+
+            //for (int i = 0; i < JaggedArray.Length; i++)
+            //{
+            //    Console.Write("[");
+
+            //    for (int j = 0; j < JaggedArray[i].Length; j++)
+            //    {
+            //        Console.Write(JaggedArray[i][j] + "\t");
+            //    }
+
+            //    Console.WriteLine("]");
+            //}
+
+
+            //// ============================================================
+            //// SelectMany
+            //// ============================================================
+
+            ///*
+            // * SelectMany converts the inner arrays
+            // * into one sequence.
+            // *
+            // * Jagged Array:
+            // *
+            // * [2, 3, 4, 42, 43]
+            // * [1, 2]
+            // * [4, 5, 5, 34, 322, 64, 45]
+            // *
+            // * SelectMany:
+            // *
+            // * 2, 3, 4, 42, 43, 1, 2, 4, 5, 5, 34, 322, 64, 45
+            // *
+            // */
+
+            //// Total Sum
+
+            //int totalSum = JaggedArray
+            //    .SelectMany(x => x)
+            //    .Sum();
+
+            //Console.WriteLine($"Total Sum: {totalSum}");
+
+
+            //// ============================================================
+            //// Find Maximum Number
+            //// ============================================================
+
+            ///*
+            // * SelectMany first creates one sequence
+            // * containing all numbers.
+            // *
+            // * Then Max finds the largest number.
+            // */
+
+            //int maxNumber = JaggedArray
+            //    .SelectMany((x) => x)
+            //    .Max();
+
+            //Console.WriteLine($"Max Number: {maxNumber}");
+
+
+            //// ============================================================
+            //// Where + Select + First
+            //// ============================================================
+
+            ///*
+            // * Find inner arrays whose length is greater than 5.
+            // *
+            // * Where:
+            // *      filters the inner arrays.
+            // *
+            // * Select:
+            // *      gets the first element from each selected array.
+            // *
+            // * First:
+            // *      gets the first element of each inner array.
+            // */
+
+            //var arryLengt = JaggedArray
+            //    .Where(x => x.Length > 5)
+            //    .Select(x => x.First());
+
+
+            //// Print the result
+
+            //foreach (var number in arryLengt)
+            //{
+            //    Console.WriteLine(number);
+            //}
+
+            #endregion
+
+
+            #region Practice
+
+            /*
+             * ==================== Jagged Array Practice ====================
+             *
+             * Scenario:
+             *
+             * You are developing a Student Grades Management System.
+             *
+             * Each student can have a different number of grades.
+             *
+             * Student 0 → 5 grades
+             * Student 1 → 3 grades
+             * Student 2 → 6 grades
+             * Student 3 → 2 grades
+             *
+             */
+
+
+            // Q1:
+            // Create a jagged array for 4 students.
+            // Give each student a different number of grades.
+            //
+            // Example:
+            // Student 0 → { 80, 90, 75, 88, 92 }
+            // Student 1 → { 70, 85, 90 }
+            // Student 2 → { 95, 80, 87, 90, 92, 88 }
+            // Student 3 → { 60, 75 }
+            int[][] SturdentGrade =
             {
-                Console.Write("[");
-                for(int j = 0; j<JaggedArray[i].Length; j++)
+                new int[]{ 80, 90, 75, 88, 92},
+                new int[]{ 70, 85, 90 },
+                new int[]{ 95, 80, 87, 90, 92, 88 } ,
+                new int[]{ 60, 75 }
+            };
+
+
+            // Q2:
+            // Print all students' grades using nested loops.
+            //
+            // Expected idea:
+            //
+            // Student 0: ...
+            // Student 1: ...
+            // Student 2: ...
+            // Student 3: ...
+            for (int i = 0; i < SturdentGrade.Length; i++)
+            {
+                Console.Write($"Student {i}:");
+                for(int j = 0; j<SturdentGrade[i].Length; j++)
                 {
-                    Console.Write(JaggedArray[i][j]+"\t" );
+                    Console.Write($"  {SturdentGrade[i][j]},");
+
                 }
-                Console.WriteLine("]");
+                Console.WriteLine();
             }
+
+            // Q3:
+            // Print the number of students in the jagged array.
+            //
+            // Hint:
+            // Use Length.
+            int NumberOfStudents = SturdentGrade.Length;
+            Console.WriteLine($"\nthe number of Student is:{NumberOfStudents}");
+
+
+            // Q4:
+            // Print the number of grades for each student.
+            //
+            // Hint:
+            // Use:
+            // jaggedArray[i].Length
+            Console.WriteLine($"\nthe number of Grade of Student");
+            for (int i = 0; i< SturdentGrade.Length; i++)
+            {
+                Console.WriteLine($"Number of gride for student {i+1} :{SturdentGrade[i].Length}");
+            }
+            // Q5:
+            // Calculate the total number of grades
+            // stored in all students.
+            //
+            // Hint:
+            // You can use SelectMany.
+            int TotalNumber=SturdentGrade.SelectMany(x => x).Count();
+            Console.WriteLine($"\nthe total number of grades:{TotalNumber}");
+
+
+
+            // Q6:
+            // Calculate the total sum of all grades.
+            //
+            // Hint:
+            // SelectMany + Sum
+            int totalSum = SturdentGrade.SelectMany(x => x).Sum();
+            Console.WriteLine($"\nthe total sum of grades:{totalSum}");
+
+
+            // Q7:
+            // Find the highest grade among all students.
+            //
+            // Hint:
+            // SelectMany + Max
+            int HighestGrad = SturdentGrade.SelectMany(x => x).Max();
+            Console.WriteLine($"\nthe Highest of grades:{HighestGrad}");
+
+
+            // Q8:
+            // Find the lowest grade among all students.
+            //
+            // Hint:
+            // SelectMany + Min
+            int LowestGrade = SturdentGrade.SelectMany(x => x).Min();
+            Console.WriteLine($"\nthe lowes of grades:{LowestGrade}");
+
+
+            // Q9:
+            // Find all students who have more than 4 grades.
+            //
+            // Hint:
+            // Use Where and check Length.
+            //
+            // Do not print the grades yet.
+            // Just identify the selected inner arrays.
+            Console.WriteLine("\n============Find all students who have more than 4 grades=============== ");
+            var StudentsWhoHave4Grade = SturdentGrade.Where(x => x.Length>4);
+            
+            foreach (var student in StudentsWhoHave4Grade)
+            {
+                
+                foreach(var grad in student)
+                {
+                    Console.Write($"{grad},");
+                }
+                Console.WriteLine();
+                
+            }
+
+            // Q10:
+            // From the students who have more than 4 grades,
+            // get the first grade of each student.
+            //
+            // Hint:
+            // Where → Select → First
+            Console.WriteLine("\n============ get the first grade of each student=============== ");
+            var StudentsWhoHave4GradeFristGrade = SturdentGrade.Where(x => x.Length>4).Select(x=>x.First());
+            foreach (var student in StudentsWhoHave4GradeFristGrade)
+            {
+               
+                
+                
+                    Console.Write($"{student},");
+                
+                Console.WriteLine();
+               
+            }
+
+            // Q11:
+            // Calculate the average of all grades
+            // from all students.
+            //
+            // Hint:
+            // SelectMany + Average
+            double average = SturdentGrade.SelectMany(x => x).Average();
+            Console.WriteLine($"\nthe average sum of grades:{average}");
+
+
+            // Q12:
+            // Find all grades greater than or equal to 90
+            // from all students.
+            //
+            // Hint:
+            // SelectMany → Where
+            Console.WriteLine("\n============ Find all grades greater than or equal to 90=============== ");
+            var GradesGreaterThanOrequal90 = SturdentGrade.SelectMany(x => x).Where(g => g>=90);
+            
+            foreach (var student in GradesGreaterThanOrequal90)
+            {
+               
+                Console.Write($"{student},");
+                Console.WriteLine();
+
+               
+            }
+
+
+
+            // Q13:
+            // Sort all grades from highest to lowest.
+            //
+            // Hint:
+            // SelectMany → OrderByDescending
+            var sortDescending=SturdentGrade.SelectMany(x=>x).OrderByDescending(g => g);
+            
+            
+
+                foreach (var grad in sortDescending)
+                {
+                    Console.Write($"{grad},");
+                }
+                Console.WriteLine();
+
+            
+
+            // Q14:
+            // Find the student with the largest number of grades.
+            //
+            // Hint:
+            // You can use:
+            // OrderByDescending(x => x.Length)
+            // 
+            // Then get the first inner array.
+            //
+            // Print its grades.
+            var studentWithLargestNumberOfGrades = SturdentGrade.OrderByDescending(g => g.Length).First();
+                Console.Write($"\nthe array that have largest number");
+            foreach(var grad in studentWithLargestNumberOfGrades)
+            {
+                Console.Write(grad+" ,");
+            }
+
+
+            // Q15:
+            // Student Performance Analysis:
+            Console.WriteLine("\n============ Student Performance Analysis=============== ");
+            //
+            // Using the same jagged array:
+            //
+            // 1. Print every student's grades.
+            for (int i = 0; i<SturdentGrade.Length; i++)
+            {
+                Console.Write($"student {i}:");
+                for (int j = 0; j<SturdentGrade[i].Length; j++)
+                {
+                    Console.Write(SturdentGrade[i][j]+" ");
+                }
+                Console.WriteLine();
+            }
+            // 2. Print the number of grades for each student.
+            Console.WriteLine($"\n the number of Grades for each student");
+            foreach (var student in SturdentGrade)
+            {
+                Console.WriteLine($"Number Of Studen grade :{student.Length}");
+            }
+
+            // 3. Calculate the total number of grades.
+            Console.WriteLine($"\nthe total number of Grade:{SturdentGrade.SelectMany(x => x).Count()}");
+            // 4. Calculate the \ntotal sum.
+            Console.WriteLine($"\nthe total sum number of Grade:{SturdentGrade.SelectMany(x => x).Sum()}");
+            // 5. Find the highe\nst grade.
+            Console.WriteLine($"\nthe Highest number of Grade:{SturdentGrade.SelectMany(x => x).Max()}");
+            // 6. Find the lowes\nt grade.
+            Console.WriteLine($"\nthe Lowest number of Grade:{SturdentGrade.SelectMany(x => x).Min()}");
+            // 7. Find the avera\nge grade.
+            Console.WriteLine($"\nthe average number of Grade:{SturdentGrade.SelectMany(x => x).Average()}");
+            // 8. Print grades >= 90.
+            Console.WriteLine("\nthe grader>=90");
+            var GradersGreaterthenor90 = SturdentGrade.SelectMany(x => x).Where(g => g>=90);
+            foreach(var grad in GradersGreaterthenor90)
+            {
+                Console.Write(grad+" ");
+            }
+            // 9. Find students with more than 4 grades.
+            Console.WriteLine("\nthe sutdent with more than 4 grades");
+            var studentMoreThan4 = SturdentGrade.Where(x => x.Length>4);
+            foreach (var student in studentMoreThan4)
+            {
+                
+                foreach (var grad in student)
+                {
+                    Console.Write($"{grad},");
+                }
+                Console.WriteLine();
+                
+            }
+
+
+            #endregion
+
+
+            #region Mistakes
+
+            /*
+             * Mistake 1:
+             *
+             * Jagged Array is NOT the same as a 2D array.
+             *
+             * Jagged:
+             *
+             * int[][]
+             *
+             * Array of arrays.
+             *
+             * Each inner array can have a different length.
+             *
+             *
+             * 2D Array:
+             *
+             * int[,]
+             *
+             * Has a fixed number of rows and columns.
+             */
+
+
+            /*
+             * Mistake 2:
+             *
+             * Don't confuse these:
+             *
+             * JaggedArray.Length
+             *
+             * and
+             *
+             * JaggedArray[i].Length
+             *
+             *
+             * JaggedArray.Length
+             *      ↓
+             * Number of inner arrays.
+             *
+             *
+             * JaggedArray[i].Length
+             *      ↓
+             * Number of elements inside one inner array.
+             */
+
+
+            /*
+             * Mistake 3:
+             *
+             * To access an element:
+             *
+             * JaggedArray[i][j]
+             *
+             * First [] → selects the inner array.
+             *
+             * Second [] → selects the element.
+             */
+
+
+            /*
+             * Mistake 4:
+             *
+             * SelectMany is important with jagged arrays.
+             *
+             * Before SelectMany:
+             *
+             * int[][]
+             *
+             * Array of arrays.
+             *
+             * After SelectMany:
+             *
+             * int sequence
+             *
+             * Example:
+             *
+             * [1, 2]
+             * [3, 4, 5]
+             *
+             * becomes:
+             *
+             * 1, 2, 3, 4, 5
+             */
+
+
+            /*
+             * Mistake 5:
+             *
+             * When using Where on a jagged array:
+             *
+             * Where(x => x.Length > 5)
+             *
+             * x represents an INNER ARRAY,
+             * not an individual number.
+             */
+
+
+            /*
+             * Mistake 6:
+             *
+             * When using SelectMany:
+             *
+             * SelectMany(x => x)
+             *
+             * x represents an inner array,
+             * and SelectMany takes all its elements
+             * and combines them into one sequence.
+             */
+
+            #endregion
+
+            #endregion
+
 
         }
         static string BitArrayToString(BitArray bitArray)
