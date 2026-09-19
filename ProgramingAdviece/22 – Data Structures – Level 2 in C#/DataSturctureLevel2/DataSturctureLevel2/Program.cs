@@ -10,6 +10,7 @@ using System.Deployment.Internal;
 using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Runtime.ConstrainedExecution;
+using System.Runtime.InteropServices;
 using System.Runtime.Remoting;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -3090,8 +3091,7 @@ namespace DataSturctureLevel2
 
             #endregion
 
-
-            #region Lesson - BitArray
+            #region Lesson17 BitArray
 
             /*
              * ==================== What is BitArray? ====================
@@ -3780,7 +3780,7 @@ namespace DataSturctureLevel2
 
             #endregion
 
-            #region Lesson - Jagged Array
+            #region Lesson18 Jagged Array
 
             /*
              * ==================== What is Jagged Array? ====================
@@ -3987,278 +3987,278 @@ namespace DataSturctureLevel2
 
             #region Practice
 
-            /*
-             * ==================== Jagged Array Practice ====================
-             *
-             * Scenario:
-             *
-             * You are developing a Student Grades Management System.
-             *
-             * Each student can have a different number of grades.
-             *
-             * Student 0 → 5 grades
-             * Student 1 → 3 grades
-             * Student 2 → 6 grades
-             * Student 3 → 2 grades
-             *
-             */
+            ///*
+            // * ==================== Jagged Array Practice ====================
+            // *
+            // * Scenario:
+            // *
+            // * You are developing a Student Grades Management System.
+            // *
+            // * Each student can have a different number of grades.
+            // *
+            // * Student 0 → 5 grades
+            // * Student 1 → 3 grades
+            // * Student 2 → 6 grades
+            // * Student 3 → 2 grades
+            // *
+            // */
 
 
-            // Q1:
-            // Create a jagged array for 4 students.
-            // Give each student a different number of grades.
-            //
-            // Example:
-            // Student 0 → { 80, 90, 75, 88, 92 }
-            // Student 1 → { 70, 85, 90 }
-            // Student 2 → { 95, 80, 87, 90, 92, 88 }
-            // Student 3 → { 60, 75 }
-            int[][] SturdentGrade =
-            {
-                new int[]{ 80, 90, 75, 88, 92},
-                new int[]{ 70, 85, 90 },
-                new int[]{ 95, 80, 87, 90, 92, 88 } ,
-                new int[]{ 60, 75 }
-            };
+            //// Q1:
+            //// Create a jagged array for 4 students.
+            //// Give each student a different number of grades.
+            ////
+            //// Example:
+            //// Student 0 → { 80, 90, 75, 88, 92 }
+            //// Student 1 → { 70, 85, 90 }
+            //// Student 2 → { 95, 80, 87, 90, 92, 88 }
+            //// Student 3 → { 60, 75 }
+            //int[][] SturdentGrade =
+            //{
+            //    new int[]{ 80, 90, 75, 88, 92},
+            //    new int[]{ 70, 85, 90 },
+            //    new int[]{ 95, 80, 87, 90, 92, 88 } ,
+            //    new int[]{ 60, 75 }
+            //};
 
 
-            // Q2:
-            // Print all students' grades using nested loops.
-            //
-            // Expected idea:
-            //
-            // Student 0: ...
-            // Student 1: ...
-            // Student 2: ...
-            // Student 3: ...
-            for (int i = 0; i < SturdentGrade.Length; i++)
-            {
-                Console.Write($"Student {i}:");
-                for(int j = 0; j<SturdentGrade[i].Length; j++)
-                {
-                    Console.Write($"  {SturdentGrade[i][j]},");
+            //// Q2:
+            //// Print all students' grades using nested loops.
+            ////
+            //// Expected idea:
+            ////
+            //// Student 0: ...
+            //// Student 1: ...
+            //// Student 2: ...
+            //// Student 3: ...
+            //for (int i = 0; i < SturdentGrade.Length; i++)
+            //{
+            //    Console.Write($"Student {i}:");
+            //    for(int j = 0; j<SturdentGrade[i].Length; j++)
+            //    {
+            //        Console.Write($"  {SturdentGrade[i][j]},");
 
-                }
-                Console.WriteLine();
-            }
+            //    }
+            //    Console.WriteLine();
+            //}
 
-            // Q3:
-            // Print the number of students in the jagged array.
-            //
-            // Hint:
-            // Use Length.
-            int NumberOfStudents = SturdentGrade.Length;
-            Console.WriteLine($"\nthe number of Student is:{NumberOfStudents}");
-
-
-            // Q4:
-            // Print the number of grades for each student.
-            //
-            // Hint:
-            // Use:
-            // jaggedArray[i].Length
-            Console.WriteLine($"\nthe number of Grade of Student");
-            for (int i = 0; i< SturdentGrade.Length; i++)
-            {
-                Console.WriteLine($"Number of gride for student {i+1} :{SturdentGrade[i].Length}");
-            }
-            // Q5:
-            // Calculate the total number of grades
-            // stored in all students.
-            //
-            // Hint:
-            // You can use SelectMany.
-            int TotalNumber=SturdentGrade.SelectMany(x => x).Count();
-            Console.WriteLine($"\nthe total number of grades:{TotalNumber}");
+            //// Q3:
+            //// Print the number of students in the jagged array.
+            ////
+            //// Hint:
+            //// Use Length.
+            //int NumberOfStudents = SturdentGrade.Length;
+            //Console.WriteLine($"\nthe number of Student is:{NumberOfStudents}");
 
 
-
-            // Q6:
-            // Calculate the total sum of all grades.
-            //
-            // Hint:
-            // SelectMany + Sum
-            int totalSum = SturdentGrade.SelectMany(x => x).Sum();
-            Console.WriteLine($"\nthe total sum of grades:{totalSum}");
-
-
-            // Q7:
-            // Find the highest grade among all students.
-            //
-            // Hint:
-            // SelectMany + Max
-            int HighestGrad = SturdentGrade.SelectMany(x => x).Max();
-            Console.WriteLine($"\nthe Highest of grades:{HighestGrad}");
-
-
-            // Q8:
-            // Find the lowest grade among all students.
-            //
-            // Hint:
-            // SelectMany + Min
-            int LowestGrade = SturdentGrade.SelectMany(x => x).Min();
-            Console.WriteLine($"\nthe lowes of grades:{LowestGrade}");
-
-
-            // Q9:
-            // Find all students who have more than 4 grades.
-            //
-            // Hint:
-            // Use Where and check Length.
-            //
-            // Do not print the grades yet.
-            // Just identify the selected inner arrays.
-            Console.WriteLine("\n============Find all students who have more than 4 grades=============== ");
-            var StudentsWhoHave4Grade = SturdentGrade.Where(x => x.Length>4);
-            
-            foreach (var student in StudentsWhoHave4Grade)
-            {
-                
-                foreach(var grad in student)
-                {
-                    Console.Write($"{grad},");
-                }
-                Console.WriteLine();
-                
-            }
-
-            // Q10:
-            // From the students who have more than 4 grades,
-            // get the first grade of each student.
-            //
-            // Hint:
-            // Where → Select → First
-            Console.WriteLine("\n============ get the first grade of each student=============== ");
-            var StudentsWhoHave4GradeFristGrade = SturdentGrade.Where(x => x.Length>4).Select(x=>x.First());
-            foreach (var student in StudentsWhoHave4GradeFristGrade)
-            {
-               
-                
-                
-                    Console.Write($"{student},");
-                
-                Console.WriteLine();
-               
-            }
-
-            // Q11:
-            // Calculate the average of all grades
-            // from all students.
-            //
-            // Hint:
-            // SelectMany + Average
-            double average = SturdentGrade.SelectMany(x => x).Average();
-            Console.WriteLine($"\nthe average sum of grades:{average}");
-
-
-            // Q12:
-            // Find all grades greater than or equal to 90
-            // from all students.
-            //
-            // Hint:
-            // SelectMany → Where
-            Console.WriteLine("\n============ Find all grades greater than or equal to 90=============== ");
-            var GradesGreaterThanOrequal90 = SturdentGrade.SelectMany(x => x).Where(g => g>=90);
-            
-            foreach (var student in GradesGreaterThanOrequal90)
-            {
-               
-                Console.Write($"{student},");
-                Console.WriteLine();
-
-               
-            }
+            //// Q4:
+            //// Print the number of grades for each student.
+            ////
+            //// Hint:
+            //// Use:
+            //// jaggedArray[i].Length
+            //Console.WriteLine($"\nthe number of Grade of Student");
+            //for (int i = 0; i< SturdentGrade.Length; i++)
+            //{
+            //    Console.WriteLine($"Number of gride for student {i+1} :{SturdentGrade[i].Length}");
+            //}
+            //// Q5:
+            //// Calculate the total number of grades
+            //// stored in all students.
+            ////
+            //// Hint:
+            //// You can use SelectMany.
+            //int TotalNumber=SturdentGrade.SelectMany(x => x).Count();
+            //Console.WriteLine($"\nthe total number of grades:{TotalNumber}");
 
 
 
-            // Q13:
-            // Sort all grades from highest to lowest.
-            //
-            // Hint:
-            // SelectMany → OrderByDescending
-            var sortDescending=SturdentGrade.SelectMany(x=>x).OrderByDescending(g => g);
-            
-            
-
-                foreach (var grad in sortDescending)
-                {
-                    Console.Write($"{grad},");
-                }
-                Console.WriteLine();
-
-            
-
-            // Q14:
-            // Find the student with the largest number of grades.
-            //
-            // Hint:
-            // You can use:
-            // OrderByDescending(x => x.Length)
-            // 
-            // Then get the first inner array.
-            //
-            // Print its grades.
-            var studentWithLargestNumberOfGrades = SturdentGrade.OrderByDescending(g => g.Length).First();
-                Console.Write($"\nthe array that have largest number");
-            foreach(var grad in studentWithLargestNumberOfGrades)
-            {
-                Console.Write(grad+" ,");
-            }
+            //// Q6:
+            //// Calculate the total sum of all grades.
+            ////
+            //// Hint:
+            //// SelectMany + Sum
+            //int totalSum = SturdentGrade.SelectMany(x => x).Sum();
+            //Console.WriteLine($"\nthe total sum of grades:{totalSum}");
 
 
-            // Q15:
-            // Student Performance Analysis:
-            Console.WriteLine("\n============ Student Performance Analysis=============== ");
-            //
-            // Using the same jagged array:
-            //
-            // 1. Print every student's grades.
-            for (int i = 0; i<SturdentGrade.Length; i++)
-            {
-                Console.Write($"student {i}:");
-                for (int j = 0; j<SturdentGrade[i].Length; j++)
-                {
-                    Console.Write(SturdentGrade[i][j]+" ");
-                }
-                Console.WriteLine();
-            }
-            // 2. Print the number of grades for each student.
-            Console.WriteLine($"\n the number of Grades for each student");
-            foreach (var student in SturdentGrade)
-            {
-                Console.WriteLine($"Number Of Studen grade :{student.Length}");
-            }
+            //// Q7:
+            //// Find the highest grade among all students.
+            ////
+            //// Hint:
+            //// SelectMany + Max
+            //int HighestGrad = SturdentGrade.SelectMany(x => x).Max();
+            //Console.WriteLine($"\nthe Highest of grades:{HighestGrad}");
 
-            // 3. Calculate the total number of grades.
-            Console.WriteLine($"\nthe total number of Grade:{SturdentGrade.SelectMany(x => x).Count()}");
-            // 4. Calculate the \ntotal sum.
-            Console.WriteLine($"\nthe total sum number of Grade:{SturdentGrade.SelectMany(x => x).Sum()}");
-            // 5. Find the highe\nst grade.
-            Console.WriteLine($"\nthe Highest number of Grade:{SturdentGrade.SelectMany(x => x).Max()}");
-            // 6. Find the lowes\nt grade.
-            Console.WriteLine($"\nthe Lowest number of Grade:{SturdentGrade.SelectMany(x => x).Min()}");
-            // 7. Find the avera\nge grade.
-            Console.WriteLine($"\nthe average number of Grade:{SturdentGrade.SelectMany(x => x).Average()}");
-            // 8. Print grades >= 90.
-            Console.WriteLine("\nthe grader>=90");
-            var GradersGreaterthenor90 = SturdentGrade.SelectMany(x => x).Where(g => g>=90);
-            foreach(var grad in GradersGreaterthenor90)
-            {
-                Console.Write(grad+" ");
-            }
-            // 9. Find students with more than 4 grades.
-            Console.WriteLine("\nthe sutdent with more than 4 grades");
-            var studentMoreThan4 = SturdentGrade.Where(x => x.Length>4);
-            foreach (var student in studentMoreThan4)
-            {
-                
-                foreach (var grad in student)
-                {
-                    Console.Write($"{grad},");
-                }
-                Console.WriteLine();
-                
-            }
+
+            //// Q8:
+            //// Find the lowest grade among all students.
+            ////
+            //// Hint:
+            //// SelectMany + Min
+            //int LowestGrade = SturdentGrade.SelectMany(x => x).Min();
+            //Console.WriteLine($"\nthe lowes of grades:{LowestGrade}");
+
+
+            //// Q9:
+            //// Find all students who have more than 4 grades.
+            ////
+            //// Hint:
+            //// Use Where and check Length.
+            ////
+            //// Do not print the grades yet.
+            //// Just identify the selected inner arrays.
+            //Console.WriteLine("\n============Find all students who have more than 4 grades=============== ");
+            //var StudentsWhoHave4Grade = SturdentGrade.Where(x => x.Length>4);
+
+            //foreach (var student in StudentsWhoHave4Grade)
+            //{
+
+            //    foreach(var grad in student)
+            //    {
+            //        Console.Write($"{grad},");
+            //    }
+            //    Console.WriteLine();
+
+            //}
+
+            //// Q10:
+            //// From the students who have more than 4 grades,
+            //// get the first grade of each student.
+            ////
+            //// Hint:
+            //// Where → Select → First
+            //Console.WriteLine("\n============ get the first grade of each student=============== ");
+            //var StudentsWhoHave4GradeFristGrade = SturdentGrade.Where(x => x.Length>4).Select(x=>x.First());
+            //foreach (var student in StudentsWhoHave4GradeFristGrade)
+            //{
+
+
+
+            //        Console.Write($"{student},");
+
+            //    Console.WriteLine();
+
+            //}
+
+            //// Q11:
+            //// Calculate the average of all grades
+            //// from all students.
+            ////
+            //// Hint:
+            //// SelectMany + Average
+            //double average = SturdentGrade.SelectMany(x => x).Average();
+            //Console.WriteLine($"\nthe average sum of grades:{average}");
+
+
+            //// Q12:
+            //// Find all grades greater than or equal to 90
+            //// from all students.
+            ////
+            //// Hint:
+            //// SelectMany → Where
+            //Console.WriteLine("\n============ Find all grades greater than or equal to 90=============== ");
+            //var GradesGreaterThanOrequal90 = SturdentGrade.SelectMany(x => x).Where(g => g>=90);
+
+            //foreach (var student in GradesGreaterThanOrequal90)
+            //{
+
+            //    Console.Write($"{student},");
+            //    Console.WriteLine();
+
+
+            //}
+
+
+
+            //// Q13:
+            //// Sort all grades from highest to lowest.
+            ////
+            //// Hint:
+            //// SelectMany → OrderByDescending
+            //var sortDescending=SturdentGrade.SelectMany(x=>x).OrderByDescending(g => g);
+
+
+
+            //    foreach (var grad in sortDescending)
+            //    {
+            //        Console.Write($"{grad},");
+            //    }
+            //    Console.WriteLine();
+
+
+
+            //// Q14:
+            //// Find the student with the largest number of grades.
+            ////
+            //// Hint:
+            //// You can use:
+            //// OrderByDescending(x => x.Length)
+            //// 
+            //// Then get the first inner array.
+            ////
+            //// Print its grades.
+            //var studentWithLargestNumberOfGrades = SturdentGrade.OrderByDescending(g => g.Length).First();
+            //    Console.Write($"\nthe array that have largest number");
+            //foreach(var grad in studentWithLargestNumberOfGrades)
+            //{
+            //    Console.Write(grad+" ,");
+            //}
+
+
+            //// Q15:
+            //// Student Performance Analysis:
+            //Console.WriteLine("\n============ Student Performance Analysis=============== ");
+            ////
+            //// Using the same jagged array:
+            ////
+            //// 1. Print every student's grades.
+            //for (int i = 0; i<SturdentGrade.Length; i++)
+            //{
+            //    Console.Write($"student {i}:");
+            //    for (int j = 0; j<SturdentGrade[i].Length; j++)
+            //    {
+            //        Console.Write(SturdentGrade[i][j]+" ");
+            //    }
+            //    Console.WriteLine();
+            //}
+            //// 2. Print the number of grades for each student.
+            //Console.WriteLine($"\n the number of Grades for each student");
+            //foreach (var student in SturdentGrade)
+            //{
+            //    Console.WriteLine($"Number Of Studen grade :{student.Length}");
+            //}
+
+            //// 3. Calculate the total number of grades.
+            //Console.WriteLine($"\nthe total number of Grade:{SturdentGrade.SelectMany(x => x).Count()}");
+            //// 4. Calculate the \ntotal sum.
+            //Console.WriteLine($"\nthe total sum number of Grade:{SturdentGrade.SelectMany(x => x).Sum()}");
+            //// 5. Find the highe\nst grade.
+            //Console.WriteLine($"\nthe Highest number of Grade:{SturdentGrade.SelectMany(x => x).Max()}");
+            //// 6. Find the lowes\nt grade.
+            //Console.WriteLine($"\nthe Lowest number of Grade:{SturdentGrade.SelectMany(x => x).Min()}");
+            //// 7. Find the avera\nge grade.
+            //Console.WriteLine($"\nthe average number of Grade:{SturdentGrade.SelectMany(x => x).Average()}");
+            //// 8. Print grades >= 90.
+            //Console.WriteLine("\nthe grader>=90");
+            //var GradersGreaterthenor90 = SturdentGrade.SelectMany(x => x).Where(g => g>=90);
+            //foreach(var grad in GradersGreaterthenor90)
+            //{
+            //    Console.Write(grad+" ");
+            //}
+            //// 9. Find students with more than 4 grades.
+            //Console.WriteLine("\nthe sutdent with more than 4 grades");
+            //var studentMoreThan4 = SturdentGrade.Where(x => x.Length>4);
+            //foreach (var student in studentMoreThan4)
+            //{
+
+            //    foreach (var grad in student)
+            //    {
+            //        Console.Write($"{grad},");
+            //    }
+            //    Console.WriteLine();
+
+            //}
 
 
             #endregion
@@ -4379,6 +4379,397 @@ namespace DataSturctureLevel2
             #endregion
 
 
+
+            #region Lesson 19 - Tuples
+
+            /*
+             * ==================== What is it? ====================
+             *
+             * Tuple:
+             * - Holds a fixed number of items.
+             * - Items can have different data types.
+             * - Useful when a method needs to return more than one value.
+             * - Tuple values are immutable (cannot change their fields after creation).
+             *
+             *
+             * ==================== Why use it? ====================
+             *
+             * - Return multiple values from a method.
+             * - Group a small number of related values together.
+             * - Avoid creating a class/struct for simple temporary data.
+             *
+             *
+             * ==================== Important Points ====================
+             *
+             * - Tuple can contain different data types.
+             * - Tuple has a fixed number of elements.
+             * - Elements can be accessed using Item1, Item2, Item3...
+             * - Tuples can have named elements.
+             * - Tuples work well with LINQ.
+             *
+             *
+             * ==================== Think ====================
+             *
+             * Tuple
+             *      ↓
+             * Fixed number of values
+             *      ↓
+             * Different data types
+             *      ↓
+             * Useful for returning multiple values
+             *
+             */
+
+            #region Coding
+
+            //        // ======================================================
+    //        // Declare Tuple
+    //        // ======================================================
+
+    //        (int, string, int) tuple = (1, "Hossam", 22);
+
+
+    //        // ======================================================
+    //        // Access Tuple Elements
+    //        // ======================================================
+
+    //        Console.WriteLine($"My ID is: {tuple.Item1}");
+    //        Console.WriteLine($"My Name is: {tuple.Item2}");
+    //        Console.WriteLine($"My Age is: {tuple.Item3}");
+
+
+    //        // ======================================================
+    //        // Using a Method That Returns a Tuple
+    //        // ======================================================
+
+    //        var value = GetValue();
+
+    //        Console.WriteLine($"My ID is: {value.Item1}");
+    //        Console.WriteLine($"My Name is: {value.Item2}");
+
+
+    //        // Example method:
+    //        //
+    //        // static (int, string) GetValue()
+    //        // {
+    //        //     return (1, "Hossam");
+    //        // }
+
+
+    //        // ======================================================
+    //        // LINQ with Tuples
+    //        // ======================================================
+
+    //        // List of tuples representing ID, Name, Age
+
+    //        List<(int ID, string Name, int Age)> People =
+    //            new List<(int ID, string Name, int Age)>
+    //        {
+    //(1, "Ali", 25),
+    //(2, "Ahmed", 30),
+    //(3, "Sara", 28),
+    //(4, "Mona", 35),
+    //(5, "Omar", 32)
+    //        };
+
+
+    //        // ======================================================
+    //        // Filter People with Age Above 30
+    //        // ======================================================
+
+    //        var Peoplefilter = People.Where(p => p.Age > 30);
+
+
+    //        // ======================================================
+    //        // Print
+    //        // ======================================================
+
+    //        // IMPORTANT:
+    //        // Here we should print Peoplefilter,
+    //        // not People, because Peoplefilter contains
+    //        // only people whose age is above 30.
+
+    //        foreach (var person in Peoplefilter)
+    //        {
+    //            Console.WriteLine(
+    //                $"My ID: {person.ID}, My Name: {person.Name}");
+    //        }
+
+
+    //        // ======================================================
+    //        // Find Average Age
+    //        // ======================================================
+
+    //        double average = People.Average(p => p.Age);
+
+    //        Console.WriteLine($"Average Age: {average}");
+
+            #endregion
+
+            #region Practice
+
+            ///*
+            // * ==================== Tuples Practice ====================
+            // *
+            // * Solve the following questions.
+            // *
+            // * Try to write the code yourself before looking at examples.
+            // */
+
+
+            //// Q1:
+            //// Create a tuple representing a student:
+            //// ID, Name, Age
+            //// Print all three values using Item1, Item2, Item3.
+            //(int , string , int ) Student = (1, "Hossam", 22);
+            //Console.WriteLine($"My ID is {Student.Item1}");
+            //Console.WriteLine($"My Name Is {Student.Item2}");
+            //Console.WriteLine($"My Age Is {Student.Item3}");
+
+
+
+            //// Q2:
+            //// Create a tuple representing a product:
+            //// ProductID, ProductName, Price
+            //// Use different data types.
+            //(int ProductID, string ProductName, double Price) Product = (1, "Laptop", 20000);
+            //Console.WriteLine($"Product ID is {Product.ProductID}");
+            //Console.WriteLine($"Product Name Is {Product.ProductName}");
+            //Console.WriteLine($"Product Price Is {Product.Price}");
+
+            ///*
+            // * Q3:
+            // * Create a tuple with named elements:
+            // * ID, Name, Salary
+            // *
+            // * Access the values using:
+            // * tuple.ID
+            // * tuple.Name
+            // * tuple.Salary
+            // */
+            //(int ID, string Name, int Salary) Employee = (1, "Hossam", 22);
+            //Console.WriteLine($"My ID is {Employee.ID}");
+            //Console.WriteLine($"My Name Is {Employee.Name}");
+            //Console.WriteLine($"My Salary Is {Employee.Salary}");
+
+
+            //// Q4:
+            //// Create a method called GetStudent()
+            //// that returns:
+            //// Student ID and Student Name
+            ////
+            //// Call the method and print the returned values.
+            //var Student1 = GetStudent();
+            //Console.WriteLine($"My ID is {Student1.ID}");
+            //Console.WriteLine($"My Name Is {Student1.Name}");
+
+
+            //// Q5:
+            //// Create a method called GetProduct()
+            //// that returns:
+            //// ProductID, ProductName, Price
+            ////
+            //// Call the method and print all values.
+            //var Product1 = GetProduct();
+            //Console.WriteLine($"Product ID is {Product1.ID}");
+            //Console.WriteLine($"Product Name Is {Product1.Name}");
+            //Console.WriteLine($"Product Price Is {Product1.Price}");
+
+            //// Q6:
+            //// Create a List of tuples representing employees:
+            //// ID, Name, Salary
+            ////
+            //// Add at least 5 employees.
+            //List<(int ID, string Name, double Salary)> listEmployee = new List<(int ID, string Name, double Salary)>
+            //{
+            //     (1, "Ali", 25),
+            //     (2, "Ahmed",3000),
+            //     (3, "Sara", 2800),
+            //     (4, "Mona", 3500),
+            //     (5, "Omar", 3200)
+            //};
+            ///*
+            // * Q7:
+            // * Using LINQ, find employees whose salary
+            // * is greater than 10000.
+            // *
+            // * Print their ID and Name.
+            // */
+            //var EmployeesWhoseSalaryGreaterThan10000 = listEmployee.Where(emp => emp.Salary>10000);
+
+            //foreach(var  emp in EmployeesWhoseSalaryGreaterThan10000)
+            //{
+            //    Console.WriteLine($"My ID is {emp.ID} My Name Is {emp.Name}");
+                
+
+            //}
+
+            //// Q8:
+            //// Using LINQ, find the employee
+            //// with the highest salary.
+            ////
+            //// Print their ID, Name and Salary.
+            //var EmployeeHighestSalary=listEmployee.OrderByDescending(emp => emp.Salary).First();
+            //Console.WriteLine($"My ID is {EmployeeHighestSalary.ID} My Name Is {EmployeeHighestSalary.Name}" +
+            //    $"My salary is {EmployeeHighestSalary.Salary}");
+
+
+            //// Q9:
+            //// Using LINQ, calculate the average salary
+            //// of all employees.
+
+            //double ave=listEmployee.Average(emp => emp.Salary);
+
+
+            //// Q10:
+            //// Using LINQ, calculate the total salary
+            //// of all employees.
+            //double sum=listEmployee.Sum(emp => emp.Salary);
+
+
+            ///*
+            // * Q11:
+            // * Create a List of tuples representing products:
+            // *
+            // * ID, Name, Price, Category
+            // *
+            // * Use at least 5 products.
+            // *
+            // * Find all products whose price
+            // * is greater than 500.
+            // */
+            //List<(int ID, string Name, double Price,string Category)> listProducts = new List<(int ID, string Name, double Price,string Category)>
+            //{
+            //     (1, "Laptop", 2000, "Electronics"),
+            //     (2, "Phone", 800, "Electronics"),
+            //     (3, "Tablet", 600, "Electronics"),
+            //     (4, "Monitor", 300, "Electronics"),
+            //     (5, "Keyboard", 100, "Electronics")
+            //};
+            //var productswhosepriceisgreaterthan500 = listProducts.Where(p => p.Price>500);
+            //// Q12:
+            //// Using the same product list,
+            //// find the cheapest product.
+            ////
+            //// Print its ID, Name and Price.
+            //var CheapestProduct=listProducts.OrderBy(p=>p.Price).First();
+            //Console.WriteLine($"Product ID is {CheapestProduct.ID} Product Name Is {CheapestProduct.Name}");
+
+
+
+
+            ///*
+            // * Q13:
+            // * Create a List of tuples representing students:
+            // *
+            // * ID, Name, Grade
+            // *
+            // * Find students whose grade >= 90.
+            // *
+            // * Print their ID and Name.
+            // */
+            //List<(int ID, string Name, int grade)> listStudent = new List<(int ID, string Name, int grade)>
+            //{
+            //     (1, "Ali", 95),
+            //     (2, "Ahmed", 85),
+            //     (3, "Sara", 92),
+            //     (4, "Mona", 88),
+            //     (5, "Omar", 90)
+            //};
+            //var StudentsWhoseGradeGreaterThanOrEqual90 = listStudent.Where(s => s.grade>=90);
+            //foreach( var student in StudentsWhoseGradeGreaterThanOrEqual90)
+            //{
+
+            //Console.WriteLine($"My ID is {student.ID} My Name Is {student.Name}");
+
+            //}
+            //// Q14:
+            //// Using the students list,
+            //// calculate the average grade.
+            //var avergaegrade=listStudent.Average(s => s.grade);
+
+
+            //// Q15:
+            //// Create a List of tuples representing orders:
+            //List<(int OrderID, string CustomerName, double TotalAmount)> listOrders = new List<(int OrderID, string CustomerName, double TotalAmount)>
+            //{
+            //     (1, "Ali", 1500),
+            //     (2, "Ahmed", 800),
+            //     (3, "Sara", 1200),
+            //     (4, "Mona", 2000),
+            //     (5, "Omar", 500)
+            //};
+            ////
+            //// OrderID, CustomerName, TotalAmount
+            ////
+            //// Using LINQ:
+            //// 1. Find orders above 1000.
+            //var orderabove1000 = listOrders.Where(o => o.TotalAmount>1000);
+            //// 2. Find the highest order.
+            //var highestorder=listOrders.OrderByDescending(o => o.TotalAmount).First();
+            //// 3. Calculate the average order amount.
+            //double av=listOrders.Average(o => o.TotalAmount);
+            //// 4. Calculate the total order amount.
+            //double total=listOrders.Sum(o => o.TotalAmount);
+
+            #endregion
+
+            #region Mistakes
+
+            /*
+             * ==================== Common Mistakes ====================
+             *
+             * Mistake 1:
+             * Using Item1/Item2 when named tuple elements
+             * are available.
+             *
+             * Better:
+             *
+             * (int ID, string Name) student = (1, "Hossam");
+             * Console.WriteLine(student.ID);
+             * Console.WriteLine(student.Name);
+             *
+             *
+             * Mistake 2:
+             * Filtering a collection but then iterating
+             * over the original collection.
+             *
+             * Wrong:
+             *
+             * var filtered = People.Where(p => p.Age > 30);
+             *
+             * foreach (var person in People)
+             *
+             *
+             * Correct:
+             *
+             * foreach (var person in filtered)
+             *
+             *
+             * Mistake 3:
+             * Forgetting that LINQ methods such as Where()
+             * return a sequence; they do not modify the
+             * original collection.
+             *
+             */
+
+            #endregion
+
+            #endregion
+
+
+        }
+        static(int ID ,string Name,double Price) GetProduct()
+        {
+            return (1, "Labtop",20000);
+        }
+        static (int ID,string Name) GetStudent()
+        {
+            return (1, "Hossam");
+        }
+        static (int, string) GetValue()
+        {
+            return (1, "ali");
         }
         static string BitArrayToString(BitArray bitArray)
         {
