@@ -9,9 +9,11 @@ using System.Data;
 using System.Deployment.Internal;
 using System.Diagnostics.Eventing.Reader;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
 using System.Runtime.Remoting;
+using System.Runtime.Remoting.Contexts;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -22,6 +24,190 @@ using System.Xml.Schema;
 
 namespace DataSturctureLevel2
 {
+    public class MyCustomCollection<T> : IEnumerable<T>,ICollection<T>
+    {
+        private List<T> item=new List<T>();
+
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            for(int i = 0; i<item.Count; i++)
+            {
+                yield return item[i];
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+        public void Add(T value)
+        {
+            item.Add(value);
+        }
+
+
+        public int Count => item.Count;
+
+        public bool IsReadOnly => false;
+
+        public void Clear()
+        {
+            item.Clear();
+        }
+
+        public bool Contains(T ite)
+        {
+            return item.Contains(ite);
+        }
+
+        public void CopyTo(T[] array, int arrayIndex)
+        {
+            item.CopyTo(array, arrayIndex);
+        }
+
+        public bool Remove(T ite)
+        {
+            return item.Remove(ite);
+        }
+        public bool RemoveAt(int Index)
+        {
+            return Remove(item[Index]);
+        }
+    }
+
+    public class SimpleList<t> : IList<t>
+    {
+        private List<t> _item=new List<t>();    
+        public t this[int index] { get =>_item[index] ; set => _item[index]=value; }
+
+        public int Count =>_item.Count;
+
+        public bool IsReadOnly => false;
+
+        public void Add(t item)
+        {
+            _item.Add(item);
+        }
+
+        public void Clear()
+        {
+            _item.Clear();
+        }
+
+        public bool Contains(t item)
+        {
+            return _item.Contains(item);
+        }
+
+        public void CopyTo(t[] array, int arrayIndex)
+        {
+            _item.CopyTo(array, arrayIndex);
+        }
+
+        public IEnumerator<t> GetEnumerator()
+        {
+            foreach(t t in _item)
+            {
+                yield return t;
+            }
+        }
+
+        public int IndexOf(t item)
+        {
+            return _item.IndexOf(item);
+        }
+
+        public void Insert(int index, t item)
+        {
+            _item.Insert(index, item);
+        }
+
+        public bool Remove(t item)
+        {
+            return _item.Remove(item);
+        }
+
+        public void RemoveAt(int index)
+        {
+            _item.RemoveAt(index);
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+    }
+
+    public class SimpleDictionary<TKey, TValue>:IDictionary<TKey, TValue>
+    {
+        private List<KeyValuePair<TKey,TValue>> keyValuePairs = new List<KeyValuePair<TKey,TValue>>();
+
+        public TValue this[TKey key] { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public ICollection<TKey> Keys => throw new NotImplementedException();
+
+        public ICollection<TValue> Values => throw new NotImplementedException();
+
+        public int Count => throw new NotImplementedException();
+
+        public bool IsReadOnly => throw new NotImplementedException();
+
+        public void Add(TKey key, TValue value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Add(KeyValuePair<TKey, TValue> item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Clear()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Contains(KeyValuePair<TKey, TValue> item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool ContainsKey(TKey key)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Remove(TKey key)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Remove(KeyValuePair<TKey, TValue> item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool TryGetValue(TKey key, out TValue value)
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+    }
     internal class Program
     {
         enum EnPersmission:int
@@ -1281,150 +1467,6 @@ namespace DataSturctureLevel2
 
 
 
-            #region lesson 11 ArrayList
-            /*
-             * is a non-generic collection that can hold elements of any data type.
-             * 
-             * dynamically resizable,automatically adjusts its size as elements are added but
-               no automatically adjusts its size when elements are removed(trimtoSize).
-
-             *memory Mangement:
-             * */
-            #region Coding
-            //ArrayList arrayList = new ArrayList();
-            //arrayList.Add(10);
-            //arrayList.Add(8);
-            //arrayList.Add(9);
-            //arrayList.Add(2);
-            //arrayList.Add(6);
-            //arrayList.Add(7);
-            //arrayList.Insert(0, 11);
-            //arrayList.Insert(3, 12);
-
-            //Console.WriteLine("========element of array==========");
-            //foreach( var item in arrayList)
-            //{
-            //    Console.WriteLine(item);
-            //}
-
-            //arrayList.Remove(10);
-            //arrayList.RemoveAt(0);
-            //Console.WriteLine("================element of array =========");
-            //foreach (var item in arrayList)
-            //{
-            //    Console.WriteLine(item);
-            //}
-
-            //Console.WriteLine("================element of array =========");
-            //arrayList.Sort();
-            //if (arrayList.BinarySearch(12)>0)
-            //{
-            //    Console.WriteLine("element exsit");
-            //    foreach( var item in arrayList)
-            //    {
-            //        Console.WriteLine(item);
-            //    }
-            //}
-            //else
-            //{
-            //    Console.WriteLine("not found");
-            //}
-
-            //Console.WriteLine("===============Filtering even number=============");
-            //var filltering= arrayList.Cast<int>().Where(item => item%2==0);
-            //foreach (var item in filltering)
-            //{
-            //    Console.WriteLine(item);
-            //}
-
-            //Console.WriteLine("=============Aggregate Function============");
-
-            //Console.WriteLine(string.Join(",", arrayList.ToArray()));
-
-            //var cast = arrayList.Cast<int>();
-            //int count=cast.Count();
-            //int sum=cast.Sum();
-            //double ave=cast.Average();
-            //int max=cast.Max();
-            //int min=cast.Min();
-
-            //Console.WriteLine($"number of element:{count}  the sum:{sum}  ave:{ave}  max:{max}  min:{min} ");
-
-            //var repetable = cast.Count(item => item==8);
-            //Console.WriteLine($"the 8 repete:{repetable} time");
-
-            #endregion
-            #region practice
-            #region Practice
-
-            // // Scenario: Store and analyze product prices in a small shop.
-
-            // ArrayList prices = new ArrayList()
-            //                                  {
-            //                                      150, 80, 200, 50, 120, 300, 80, 250, 100, 50
-            //                                  };
-
-
-            // // Q1: Add a new product price of 175 to the list.
-            // prices.Add(175);
-
-            // // Q2: Insert a product price of 90 at index 2.
-            // prices.Insert(2, 90);
-
-            // // Q3: Remove the first product whose price is 50.
-            // prices.Remove(50);
-
-            // // Q4: Remove the product price at index 4.
-            // prices.RemoveAt(4);
-
-            // // Q5: Sort all product prices in ascending order.
-            // prices.Sort();
-            // prices.Cast<int>().OrderBy(item=>item);
-
-            // // Q6: Check whether the price 200 exists in the list
-            // //     using BinarySearch.
-            // if (prices.BinarySearch(200)>0)
-            // {
-            //     Console.WriteLine("yes");
-            // }
-
-            // // Q7: Find all product prices that are greater than 100.
-            // var castint = prices.Cast<int>();
-            //var Productgreater100 =castint.Where(item=>item>200);
-
-            // // Q8: Find all product prices that are even numbers.
-            //var producteven= castint.Where(item => item%2==0);
-
-            // // Q9: Count how many products have a price of 80.
-            //var numberOfProdect= castint.Count();
-
-            // // Q10: Calculate the total price of all products.
-            // var sumtion=castint.Sum(); ;
-
-            // // Q11: Calculate the average product price.
-            // var average=castint.Average();
-            // // Q12: Find the most expensive product price.
-            // var maxmize=castint.Max();
-
-            // // Q13: Find the cheapest product price.
-            // var minmize=castint.Min();
-
-            // // Q14: Find all products whose price is greater than
-            // //      the average product price.
-            // var ProductGraterThenAverage=castint.Where(item=>item>average);
-
-            // // Q15: Find the total number of products,
-            // //      the total price,
-            // //      the average price,
-            // //      the highest price,
-            // //      and the lowest price,
-            // //      then print all results.
-            // Console.WriteLine($"number of element:{numberOfProdect}  the sum:{sumtion}  ave:{average}  max:{maxmize}  min:{minmize} ");
-
-
-            #endregion
-            #endregion
-            #endregion
 
 
             #region lesson 12 observable collection
@@ -2425,6 +2467,151 @@ namespace DataSturctureLevel2
             #endregion
 
 
+
+            #region lesson 11 ArrayList
+            /*
+             * is a non-generic collection that can hold elements of any data type.
+             * 
+             * dynamically resizable,automatically adjusts its size as elements are added but
+               no automatically adjusts its size when elements are removed(trimtoSize).
+
+             *memory Mangement:
+             * */
+            #region Coding
+            //ArrayList arrayList = new ArrayList();
+            //arrayList.Add(10);
+            //arrayList.Add(8);
+            //arrayList.Add(9);
+            //arrayList.Add(2);
+            //arrayList.Add(6);
+            //arrayList.Add(7);
+            //arrayList.Insert(0, 11);
+            //arrayList.Insert(3, 12);
+
+            //Console.WriteLine("========element of array==========");
+            //foreach( var item in arrayList)
+            //{
+            //    Console.WriteLine(item);
+            //}
+
+            //arrayList.Remove(10);
+            //arrayList.RemoveAt(0);
+            //Console.WriteLine("================element of array =========");
+            //foreach (var item in arrayList)
+            //{
+            //    Console.WriteLine(item);
+            //}
+
+            //Console.WriteLine("================element of array =========");
+            //arrayList.Sort();
+            //if (arrayList.BinarySearch(12)>0)
+            //{
+            //    Console.WriteLine("element exsit");
+            //    foreach( var item in arrayList)
+            //    {
+            //        Console.WriteLine(item);
+            //    }
+            //}
+            //else
+            //{
+            //    Console.WriteLine("not found");
+            //}
+
+            //Console.WriteLine("===============Filtering even number=============");
+            //var filltering= arrayList.Cast<int>().Where(item => item%2==0);
+            //foreach (var item in filltering)
+            //{
+            //    Console.WriteLine(item);
+            //}
+
+            //Console.WriteLine("=============Aggregate Function============");
+
+            //Console.WriteLine(string.Join(",", arrayList.ToArray()));
+
+            //var cast = arrayList.Cast<int>();
+            //int count=cast.Count();
+            //int sum=cast.Sum();
+            //double ave=cast.Average();
+            //int max=cast.Max();
+            //int min=cast.Min();
+
+            //Console.WriteLine($"number of element:{count}  the sum:{sum}  ave:{ave}  max:{max}  min:{min} ");
+
+            //var repetable = cast.Count(item => item==8);
+            //Console.WriteLine($"the 8 repete:{repetable} time");
+
+            #endregion
+            #region practice
+            #region Practice
+
+            // // Scenario: Store and analyze product prices in a small shop.
+
+            // ArrayList prices = new ArrayList()
+            //                                  {
+            //                                      150, 80, 200, 50, 120, 300, 80, 250, 100, 50
+            //                                  };
+
+
+            // // Q1: Add a new product price of 175 to the list.
+            // prices.Add(175);
+
+            // // Q2: Insert a product price of 90 at index 2.
+            // prices.Insert(2, 90);
+
+            // // Q3: Remove the first product whose price is 50.
+            // prices.Remove(50);
+
+            // // Q4: Remove the product price at index 4.
+            // prices.RemoveAt(4);
+
+            // // Q5: Sort all product prices in ascending order.
+            // prices.Sort();
+            // prices.Cast<int>().OrderBy(item=>item);
+
+            // // Q6: Check whether the price 200 exists in the list
+            // //     using BinarySearch.
+            // if (prices.BinarySearch(200)>0)
+            // {
+            //     Console.WriteLine("yes");
+            // }
+
+            // // Q7: Find all product prices that are greater than 100.
+            // var castint = prices.Cast<int>();
+            //var Productgreater100 =castint.Where(item=>item>200);
+
+            // // Q8: Find all product prices that are even numbers.
+            //var producteven= castint.Where(item => item%2==0);
+
+            // // Q9: Count how many products have a price of 80.
+            //var numberOfProdect= castint.Count();
+
+            // // Q10: Calculate the total price of all products.
+            // var sumtion=castint.Sum(); ;
+
+            // // Q11: Calculate the average product price.
+            // var average=castint.Average();
+            // // Q12: Find the most expensive product price.
+            // var maxmize=castint.Max();
+
+            // // Q13: Find the cheapest product price.
+            // var minmize=castint.Min();
+
+            // // Q14: Find all products whose price is greater than
+            // //      the average product price.
+            // var ProductGraterThenAverage=castint.Where(item=>item>average);
+
+            // // Q15: Find the total number of products,
+            // //      the total price,
+            // //      the average price,
+            // //      the highest price,
+            // //      and the lowest price,
+            // //      then print all results.
+            // Console.WriteLine($"number of element:{numberOfProdect}  the sum:{sumtion}  ave:{average}  max:{maxmize}  min:{minmize} ");
+
+
+            #endregion
+            #endregion
+            #endregion
 
             #region Lesson 16 Array
 
@@ -4423,86 +4610,86 @@ namespace DataSturctureLevel2
             #region Coding
 
             //        // ======================================================
-    //        // Declare Tuple
-    //        // ======================================================
+            //        // Declare Tuple
+            //        // ======================================================
 
-    //        (int, string, int) tuple = (1, "Hossam", 22);
-
-
-    //        // ======================================================
-    //        // Access Tuple Elements
-    //        // ======================================================
-
-    //        Console.WriteLine($"My ID is: {tuple.Item1}");
-    //        Console.WriteLine($"My Name is: {tuple.Item2}");
-    //        Console.WriteLine($"My Age is: {tuple.Item3}");
+            //        (int, string, int) tuple = (1, "Hossam", 22);
 
 
-    //        // ======================================================
-    //        // Using a Method That Returns a Tuple
-    //        // ======================================================
+            //        // ======================================================
+            //        // Access Tuple Elements
+            //        // ======================================================
 
-    //        var value = GetValue();
-
-    //        Console.WriteLine($"My ID is: {value.Item1}");
-    //        Console.WriteLine($"My Name is: {value.Item2}");
-
-
-    //        // Example method:
-    //        //
-    //        // static (int, string) GetValue()
-    //        // {
-    //        //     return (1, "Hossam");
-    //        // }
+            //        Console.WriteLine($"My ID is: {tuple.Item1}");
+            //        Console.WriteLine($"My Name is: {tuple.Item2}");
+            //        Console.WriteLine($"My Age is: {tuple.Item3}");
 
 
-    //        // ======================================================
-    //        // LINQ with Tuples
-    //        // ======================================================
+            //        // ======================================================
+            //        // Using a Method That Returns a Tuple
+            //        // ======================================================
 
-    //        // List of tuples representing ID, Name, Age
+            //        var value = GetValue();
 
-    //        List<(int ID, string Name, int Age)> People =
-    //            new List<(int ID, string Name, int Age)>
-    //        {
-    //(1, "Ali", 25),
-    //(2, "Ahmed", 30),
-    //(3, "Sara", 28),
-    //(4, "Mona", 35),
-    //(5, "Omar", 32)
-    //        };
+            //        Console.WriteLine($"My ID is: {value.Item1}");
+            //        Console.WriteLine($"My Name is: {value.Item2}");
 
 
-    //        // ======================================================
-    //        // Filter People with Age Above 30
-    //        // ======================================================
-
-    //        var Peoplefilter = People.Where(p => p.Age > 30);
-
-
-    //        // ======================================================
-    //        // Print
-    //        // ======================================================
-
-    //        // IMPORTANT:
-    //        // Here we should print Peoplefilter,
-    //        // not People, because Peoplefilter contains
-    //        // only people whose age is above 30.
-
-    //        foreach (var person in Peoplefilter)
-    //        {
-    //            Console.WriteLine(
-    //                $"My ID: {person.ID}, My Name: {person.Name}");
-    //        }
+            //        // Example method:
+            //        //
+            //        // static (int, string) GetValue()
+            //        // {
+            //        //     return (1, "Hossam");
+            //        // }
 
 
-    //        // ======================================================
-    //        // Find Average Age
-    //        // ======================================================
+            //        // ======================================================
+            //        // LINQ with Tuples
+            //        // ======================================================
 
-    //        double average = People.Average(p => p.Age);
+            //        // List of tuples representing ID, Name, Age
 
-    //        Console.WriteLine($"Average Age: {average}");
+            //        List<(int ID, string Name, int Age)> People =
+            //            new List<(int ID, string Name, int Age)>
+            //        {
+            //(1, "Ali", 25),
+            //(2, "Ahmed", 30),
+            //(3, "Sara", 28),
+            //(4, "Mona", 35),
+            //(5, "Omar", 32)
+            //        };
+
+
+            //        // ======================================================
+            //        // Filter People with Age Above 30
+            //        // ======================================================
+
+            //        var Peoplefilter = People.Where(p => p.Age > 30);
+
+
+            //        // ======================================================
+            //        // Print
+            //        // ======================================================
+
+            //        // IMPORTANT:
+            //        // Here we should print Peoplefilter,
+            //        // not People, because Peoplefilter contains
+            //        // only people whose age is above 30.
+
+            //        foreach (var person in Peoplefilter)
+            //        {
+            //            Console.WriteLine(
+            //                $"My ID: {person.ID}, My Name: {person.Name}");
+            //        }
+
+
+            //        // ======================================================
+            //        // Find Average Age
+            //        // ======================================================
+
+            //        double average = People.Average(p => p.Age);
+
+            //        Console.WriteLine($"Average Age: {average}");
 
             #endregion
 
@@ -4600,7 +4787,7 @@ namespace DataSturctureLevel2
             //foreach(var  emp in EmployeesWhoseSalaryGreaterThan10000)
             //{
             //    Console.WriteLine($"My ID is {emp.ID} My Name Is {emp.Name}");
-                
+
 
             //}
 
@@ -4758,8 +4945,2774 @@ namespace DataSturctureLevel2
             #endregion
 
 
+
+
+
+
+            #region Lesson 20 - Collection Interfaces
+
+            /*
+             * ==================== What is it? ====================
+             *
+             * A collection interface is a contract that defines
+             * methods and properties that a collection must implement.
+             *
+             * Collection interfaces can be generic and non-generic.
+             *
+             * They allow developers to write methods that can work
+             * with multiple collection types.
+             *
+             * This gives us:
+             * - Reusability
+             * - Flexibility
+             * - Less dependency on a specific collection type
+             *
+             *
+             * ==================== Common Collection Interfaces ====================
+             *
+             * IEnumerable<T>
+             *      ↓
+             * Used mainly for iteration.
+             *
+             * ICollection<T>
+             *      ↓
+             * Adds basic collection operations such as:
+             * Add, Remove, Count, Contains...
+             *
+             * IList<T>
+             *      ↓
+             * Adds index-based access and insertion.
+             *
+             * IDictionary<TKey, TValue>
+             *      ↓
+             * Represents key-value collections.
+             *
+             * ISet<T>
+             *      ↓
+             * Represents a collection of unique values.
+             *
+             *
+             * ==================== Important Idea ====================
+             *
+             * Interface
+             *      ↓
+             * Contract
+             *      ↓
+             * Defines what operations are available
+             *      ↓
+             * Different collection classes can implement it
+             *
+             *
+             * Example:
+             *
+             * IList<int>
+             *      ↓
+             * Can reference
+             *      ↓
+             * List<int>
+             *
+             * But also another class that implements IList<int>.
+             *
+             *
+             * ==================== Think ====================
+             *
+             * Interface
+             *       ↓
+             * "What can this collection do?"
+             *
+             * Implementation
+             *       ↓
+             * "How does this collection actually do it?"
+             *
+             */
+
+            #region Interface Hierarchy
+
+            /*
+             *
+             *                    IEnumerable<T>
+             *                         │
+             *                         ↓
+             *                    ICollection<T>
+             *                         │
+             *                         ↓
+             *                      IList<T>
+             *
+             *
+             * IDictionary<TKey,TValue>   ISet<T>
+             *
+             *
+             * Important:
+             *
+             * Not every collection interface is simply a child
+             * of IList<T>.
+             *
+             * IDictionary and ISet represent different
+             * collection behaviors.
+             *
+             */
+
+            #endregion
+
+
+            #region Generic vs NonGeneric
+
+            /*
+             * ==================== Generic ====================
+             *
+             * IEnumerable<T>
+             * ICollection<T>
+             * IList<T>
+             * IDictionary<TKey,TValue>
+             * ISet<T>
+             *
+             *
+             * ==================== Non-Generic ====================
+             *
+             * IEnumerable
+             * ICollection
+             * IList
+             * IDictionary
+             * ISet
+             *
+             *
+             * Generic interfaces provide type safety.
+             *
+             * Example:
+             *
+             * IList<int> numbers;
+             *
+             * Only int values should be stored.
+             *
+             *
+             * Non-generic interfaces work with object,
+             * so they can contain different types.
+             *
+             */
+
+            #endregion
+
+
+            #region Interface vs Concrete Collection
+
+            /*
+             * Concrete collection:
+             *
+             * List<int> numbers = new List<int>();
+             *
+             * The variable depends directly on List<int>.
+             *
+             *
+             * Interface:
+             *
+             * IList<int> numbers = new List<int>();
+             *
+             * The variable depends on the IList<int> contract.
+             *
+             *
+             * This gives us more flexibility.
+             *
+             *
+             * Think:
+             *
+             * IList<int>
+             *      ↓
+             * "I need something that behaves like an IList<int>"
+             *
+             * List<int>
+             *      ↓
+             * "I am one implementation of that contract."
+             *
+             */
+
+            #endregion
+
+
+            #region Important Difference
+
+            /*
+             *
+             * IEnumerable<T>
+             * ----------------
+             * Main purpose:
+             * Iteration.
+             *
+             * Example:
+             *
+             * foreach (var item in collection)
+             *
+             *
+             *
+             * ICollection<T>
+             * ----------------
+             * Main purpose:
+             * Basic collection operations.
+             *
+             * Add
+             * Remove
+             * Count
+             * Contains
+             *
+             *
+             *
+             * IList<T>
+             * ----------------
+             * Main purpose:
+             * List-like collection with index.
+             *
+             * Add
+             * Remove
+             * Insert
+             * Indexer
+             *
+             *
+             *
+             * IDictionary<TKey,TValue>
+             * ----------------
+             * Main purpose:
+             * Key -> Value
+             *
+             * Example:
+             *
+             * ID -> Student Name
+             *
+             *
+             *
+             * ISet<T>
+             * ----------------
+             * Main purpose:
+             * Unique values.
+             *
+             */
+
+            #endregion
+
+
+            #region Coding
+
+            //// ======================================================
+            //// The original notes
+            //// ======================================================
+
+            ///*
+            // * collection interface is contract defin methode and properity that collection must implement
+            // * it is genric and non genric 
+            // * allow developer to design methods that can operate on multiple types of collection(reusability and flexibility)
+            // * example(IEnumerable<t> ,Icollection<t> , Ilist<t> ,Idictionary<t> Iset<t>
+            // *
+            // */
+
+
+            //// ======================================================
+            //// 1. IEnumerable<T>
+            //// ======================================================
+
+            //// IEnumerable<T> gives us the ability to iterate
+            //// through a collection.
+
+            //List<int> numbers = new List<int> { 10, 20, 30, 40 };
+
+            //IEnumerable<int> enumerableNumbers = numbers;
+
+
+            ////for loop worke with IEnumerable<T> because count() and elementAt() are extension methods provided by LINQ.
+            //for (int i = 0; i < enumerableNumbers.Count(); i++)
+            //{
+            //    Console.WriteLine(enumerableNumbers.ElementAt(i));
+            //}
+
+            //foreach (int number in enumerableNumbers)
+            //{
+            //    Console.WriteLine(number);
+            //}
+
+
+            //// ======================================================
+            //// 2. ICollection<T>
+            //// ======================================================
+
+            //// ICollection<T> provides basic collection operations.
+
+            //ICollection<int> collectionNumbers =
+            //    new List<int> { 10, 20, 30 };
+
+            //collectionNumbers.Add(40);
+            //collectionNumbers.Remove(20);
+
+            //Console.WriteLine($"Count: {collectionNumbers.Count}");
+
+            //Console.WriteLine(
+            //    $"Contains 30: {collectionNumbers.Contains(30)}");
+
+
+            ////we can use foreach to iterate over the collection because ICollection<T> implements IEnumerable<T>
+            //foreach (int number in collectionNumbers)
+            //{
+            //    Console.WriteLine(number);
+            //}
+
+
+            //// ======================================================
+            //// 3. IList<T>
+            //// ======================================================
+
+            //// IList<T> provides index-based access
+            //// in addition to basic collection operations.
+
+            //IList<int> listNumbers =
+            //    new List<int> { 10, 20, 30 };
+
+            //Console.WriteLine(listNumbers[0]);
+
+            //listNumbers[1] = 200;
+
+            //listNumbers.Insert(1, 15);
+
+            //foreach (int number in listNumbers)
+            //{
+            //    Console.WriteLine(number);
+            //}
+
+
+            //// ======================================================
+            //// 4. IDictionary<TKey, TValue>
+            //// ======================================================
+
+            //// IDictionary<TKey, TValue>
+            //// represents key-value collections.
+
+            //IDictionary<int, string> students =
+            //    new Dictionary<int, string>
+            //    {
+            //        { 1, "Ali" },
+            //        { 2, "Ahmed" },
+            //        { 3, "Sara" }
+            //     };
+
+            //students.Add(4, "Mona");
+
+            //Console.WriteLine(students[1]);
+
+            //if (students.ContainsKey(2))
+            //{
+            //    Console.WriteLine(students[2]);
+            //}
+
+
+            //// ======================================================
+            //// 5. ISet<T>
+            //// ======================================================
+
+            //// ISet<T> represents a collection
+            //// that contains unique values.
+
+            //ISet<int> uniqueNumbers =
+            //    new HashSet<int> { 10, 20, 30 };
+
+            //uniqueNumbers.Add(20); // Will not add duplicate
+            //uniqueNumbers.Add(40);
+
+            //foreach (int number in uniqueNumbers)
+            //{
+            //    Console.WriteLine(number);
+            //}
+
+
+            //// ======================================================
+            //// 6. One Method Working with an Interface
+            //// ======================================================
+
+            //// Instead of making a method specifically for List<int>,
+            //// we can make it accept IEnumerable<int>.
+
+            //void PrintNumbers(IEnumerable<int> Numbers)
+            //{
+            //    foreach (int number in Numbers)
+            //    {
+            //        Console.WriteLine(number);
+            //    }
+            //}
+
+
+            //// The same method can work with different collections.
+
+            //List<int> list = new List<int> { 1, 2, 3 };
+
+            //HashSet<int> set = new HashSet<int> { 4, 5, 6 };
+
+            //PrintNumbers(list);
+            //PrintNumbers(set);
+
+
+            //// ======================================================
+            //// 7. Another Example with ICollection<T>
+            //// ======================================================
+            ////Ienumerable not work here because it does not have Add() method
+
+            ////and Ilist can work here becuse it implement ICollection<T> but it is not the best choice because it is more specific than ICollection<T>
+
+            //void AddNumber(ICollection<int> Numbers)
+            //{
+            //    Numbers.Add(100);
+            //}
+
+            //List<int> numbersList = new List<int> { 1, 2, 3 };
+
+            //HashSet<int> numbersSet = new HashSet<int> { 4, 5, 6 };
+
+
+            //AddNumber(numbersList);
+            //AddNumber(numbersSet);
+
+
+            #endregion
+
+
+
+            #region Practice
+
+            ///*
+            // * ==================== Collection Interfaces Practice ====================
+            // *
+            // * Solve all questions.
+            // *
+            // * Focus on understanding:
+            // *
+            // * Interface
+            // *      ↓
+            // * Contract
+            // *      ↓
+            // * Different implementations
+            // *
+            // */
+
+
+            //// Q1:
+            //// Create a List<int> containing:
+            //// 10, 20, 30, 40
+            ////
+            //// Store it in an IEnumerable<int> variable.
+            //// Use foreach to print all numbers.
+
+            //IEnumerable<int> ints= new List<int>() { 10, 20, 30, 40 };
+
+            //foreach (int i in ints)
+            //{
+            //    Console.Write(i+",");
+            //}
+            //Console.WriteLine();
+            //#region test
+            ////IEnumerator<int> enumerator = ints.GetEnumerator();
+            ////while (enumerator.MoveNext())
+            ////{
+            ////    Console.WriteLine(enumerator.Current);
+
+            ////}
+            ////enumerator.Reset();
+            ////while (enumerator.MoveNext())
+            ////{
+            ////    Console.WriteLine(enumerator.Current);
+
+            ////}
+            //#endregion
+
+            //// Q2:
+            //// Create a HashSet<int> containing:
+            //// 10, 20, 30, 40
+            ////
+            //// Store it in an IEnumerable<int> variable.
+            //// Print all values using foreach.
+            //IEnumerable<int> ints2 = new HashSet<int>() { 10, 20, 30, 40 };
+            //foreach(int i in ints2)
+            //{
+            //    Console.Write(i+",");
+            //}
+            //Console.WriteLine();
+
+
+            //// Q3:
+            //// Create an ICollection<string>
+            //// using List<string> as the implementation.
+            ////
+            //// Add 5 names.
+            //// Print Count.
+            //ICollection<string> strings = new List<string>();
+            //strings.Add("Hossam");
+            //strings.Add("Ali");
+            //strings.Add("Ahmed");
+            //strings.Add("Mahmode");
+            //strings.Add("sami");
+            //Console.WriteLine("the coundt o strings "+strings.Count);
+
+
+            ///*
+            // * Q4:
+            // * Using ICollection<string>:
+            // *
+            // * 1. Add a new name.
+            // * 2. Remove one name.
+            // * 3. Check if a specific name exists.
+            // * 4. Print Count.
+            // */
+            //strings.Add("Handa");
+            //strings.Remove("Hossam");
+            //if (strings.Contains("Hossam"))
+            //{
+            //    Console.WriteLine(" Exsit");
+            //}
+            //else { Console.WriteLine("Not Exsit"); }
+
+            //Console.WriteLine("the coundt o strings "+strings.Count);
+
+            //// Q5:
+            //// Create an IList<int>
+            //// using List<int> as the implementation.
+            ////
+            //// Add 5 numbers.
+            //// Print the value at index 2.
+            //IList<int> ints1 = new List<int>();
+            //ints1.Add(10);
+            //ints1.Add(4);
+            //ints1.Add(5);
+            //ints1.Add(9);
+            //ints1.Add(7);
+            //Console.WriteLine("the value at indext 2:"+ints1[2]);
+
+
+            //// Q6:
+            //// Using IList<int>:
+            ////
+            //// 1. Change the value at index 1.
+            //// 2. Insert a value at index 2.
+            //// 3. Remove a value.
+            //// 4. Print the final list.
+            //Console.WriteLine("==============Question 6============");
+            //ints1[1]=999;
+            //ints1.Insert(2, 2222);
+            //ints1.Remove(10);
+            //Console.WriteLine(string.Join(",", ints1));
+
+
+            ///*
+            // * Q7:
+            // * Create an IDictionary<int, string>
+            // * using Dictionary<int, string>.
+            // *
+            // * Store:
+            // *
+            // * 1 -> Ali
+            // * 2 -> Ahmed
+            // * 3 -> Sara
+            // * 4 -> Mona
+            // *
+            // * Print all key-value pairs.
+            // */
+            //Console.WriteLine("==============Question 7============");
+            //IDictionary<int, string> keyValuePairs = new Dictionary<int, string>() { { 1, "Ali" }, { 2, "Ahmed" }, { 3, "Sara" }, { 4, "mona" } };
+
+            //foreach(var Item in keyValuePairs)
+            //{
+            //    Console.WriteLine($"the value of key{Item.Key} is {Item.Value}");
+            //}
+
+
+            //// Q8:
+            //// Using the dictionary from Q7:
+            ////
+            //// Check if key 3 exists.
+            //// If it exists, print its value.
+            //Console.WriteLine("==============Question 8============");
+            //if (keyValuePairs.ContainsKey(3))
+            //{
+            //    Console.WriteLine($"is exists and value :{keyValuePairs[3]}");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("not Exsit");
+            //}
+
+
+            ///*
+            // * Q9:
+            // * Create an ISet<int>
+            // * using HashSet<int>.
+            // *
+            // * Add:
+            // *
+            // * 10, 20, 30, 20, 40, 30
+            // *
+            // * Print the final values.
+            // *
+            // * Observe what happens to duplicates.
+            // */
+            //Console.WriteLine("==============Question 9============");
+            //ISet<int> ints3 = new HashSet<int> { 10, 20, 30, 20, 40, 30 };
+            //Console.WriteLine(string.Join(",", ints3));
+            ////has set remove doublict
+
+
+            //// Q10:
+            //// Write a method:
+            ////
+            //// PrintCollection(IEnumerable<int> numbers)
+            ////
+            //// The method should print all values.
+            ////
+            //// Test it with:
+            //// List<int>
+            //// HashSet<int>
+            //Console.WriteLine("==============Question 10============");
+            //void PrintCollection(IEnumerable<int> numbers)
+            //{
+            //    foreach (var item in numbers)
+            //    {
+            //        Console.Write(item+",");
+            //    }
+            //}
+            //List<int> ints4 = new List<int> { 3, 4, 5, 6 };
+            //HashSet<int> ints5 = new HashSet<int> { 47, 23, 54 };
+            //PrintCollection(ints4);
+            //Console.WriteLine();
+            //PrintCollection(ints5);
+
+            ///*
+            // * Q11:
+            // * Write a method:
+            // *
+            // * AddItem(ICollection<int> numbers)
+            // *
+            // * The method should add 100.
+            // *
+            // * Test it with:
+            // * List<int>
+            // * HashSet<int>
+            // */
+            //Console.WriteLine("==============Question 11============");
+            //void AddItem(ICollection<int> numbers)
+            //{
+            //    numbers.Add(100);
+            //}
+            //AddItem(ints4);
+            //AddItem(ints5);
+
+
+            //// Q12:
+            //// Create a method:
+            ////
+            //// PrintList(IList<string> names)
+            ////
+            //// The method should print all names
+            //// using a for loop and the indexer.
+            ////
+            //// Test it with a List<string>.
+            //Console.WriteLine("==============Question 12============");
+            //void PrintList(IList<string> names)
+            //{
+            //    for (int i = 0; i<names.Count; i++)
+            //    {
+            //        Console.Write(names[i]+",");
+            //    }
+            //}
+            //List<string> strings1 = new List<string> { "Hossam", "Ahmed", "Ali" };
+            //PrintList(strings1);
+
+            ///*
+            // * Q13:
+            // * Create a method:
+            // *
+            // * PrintStudents(IDictionary<int, string> students)
+            // *
+            // * The method should print:
+            // *
+            // * ID -> Name
+            // *
+            // * Test it with Dictionary<int, string>.
+            // */
+
+
+            //// Q14:
+            //// Create a method:
+            ////
+            //// PrintUniqueNumbers(ISet<int> numbers)
+            ////
+            //// The method should print all unique numbers.
+            ////
+            //// Test it with HashSet<int>.
+
+
+            ///*
+            // * Q15:
+            // * Create:
+            // *
+            // * List<int>
+            // * HashSet<int>
+            // *
+            // * Then create ONE method that accepts:
+            // *
+            // * IEnumerable<int>
+            // *
+            // * Inside the method:
+            // * - Print all values.
+            // * - Print Count using LINQ.
+            // *
+            // * Call the same method with both collections.
+            // *
+            // * Think:
+            // *
+            // * Why can one method work with
+            // * both List<int> and HashSet<int>?
+            // */
+
+            #endregion
+
+
+            #region Mistakes
+
+            /*
+             * ==================== Common Mistakes ====================
+             *
+             * Mistake 1:
+             *
+             * Thinking an interface is the actual collection.
+             *
+             * Wrong idea:
+             *
+             * IList<int> creates the data structure itself.
+             *
+             * Better understanding:
+             *
+             * IList<int> = contract
+             * List<int> = implementation
+             *
+             *
+             *
+             * Mistake 2:
+             *
+             * Thinking every collection implements every interface.
+             *
+             * Different collections implement different interfaces.
+             *
+             *
+             *
+             * Mistake 3:
+             *
+             * Using an interface that does not provide
+             * the operation you need.
+             *
+             * Example:
+             *
+             * IEnumerable<int>
+             *
+             * does not give you Add().
+             *
+             * If you need Add(), ICollection<int>
+             * may be more appropriate.
+             *
+             *
+             *
+             * Mistake 4:
+             *
+             * Confusing IEnumerable with IEnumerable<T>.
+             *
+             * IEnumerable
+             *      ↓
+             * Non-generic
+             *
+             * IEnumerable<T>
+             *      ↓
+             * Generic and type-safe
+             *
+             *
+             *
+             * Mistake 5:
+             *
+             * Thinking the interface determines how the
+             * collection works internally.
+             *
+             * The interface describes the contract.(you should have 1 2 3 of methode or properties)
+             *
+             * The concrete class provides the implementation.(provide implementation for this 1 2 3 of methode or properties)  
+             *
+             */
+
+            #endregion
+
+            #endregion
+
+            #region Lesson 21 - IEnumerable
+
+            /*
+             * ==================== What is IEnumerable? ====================
+             *
+             * IEnumerable is the base interface for collections
+             * that provides support for simple iteration.
+             *
+             * It defines one main method:
+             *
+             * GetEnumerator()
+             *
+             * GetEnumerator() returns an IEnumerator.
+             *
+             * IEnumerator is responsible for controlling the iteration
+             * using:
+             *
+             * - MoveNext()
+             * - Current
+             * - Reset()
+             *
+             *
+             * ==================== Why use IEnumerable? ====================
+             *
+             * The best practice is to use IEnumerable when:
+             *
+             * - You need to read/iterate over a collection.
+             * - You do not need to modify the collection.
+             *
+             *
+             * This makes your method less dependent on a specific
+             * collection type.
+             *
+             *
+             * ==================== How does it work? ====================
+             *
+             * Collection
+             *      ↓
+             * IEnumerable
+             *      ↓
+             * GetEnumerator()
+             *      ↓
+             * IEnumerator
+             *      ↓
+             * ┌──────────────┐
+             * │ MoveNext()   │ → Move to next item
+             * │ Current      │ → Get current item
+             * │ Reset()      │ → Return to beginning
+             * └──────────────┘
+             *
+             *
+             * ==================== foreach ====================
+             *
+             * When we write:
+             *
+             * foreach (var item in collection)
+             *
+             * C# uses the collection's enumeration mechanism
+             * to move through its elements.
+             *
+             *
+             * ==================== Important Idea ====================
+             *
+             * IEnumerable
+             *      ↓
+             * "I can give you an enumerator."
+             *
+             * IEnumerator
+             *      ↓
+             * "I know how to move through the collection
+             *  and give you the current item."
+             *
+             */
+
+            #region Coding
+
+            //// ======================================================
+            //// Custom Collection
+            //// ======================================================
+
+            ///*
+            //MyCustomCollection<int> m = new MyCustomCollection<int>();
+
+            //m.Add(1);
+            //m.Add(2);
+            //m.Add(3);
+
+
+            //// MyCustomCollection implements IEnumerable,
+            //// so we can use foreach to iterate over it.
+            ////
+            //// If we want to use a for loop,
+            //// we should implement IList interface
+            //// to get Count property and indexer.
+
+            //for (int i = 0; i < m.Count(); i++)
+            //{
+            //    Console.WriteLine(m[i]);
+            //}
+
+
+            //foreach (var item in m)
+            //{
+            //    Console.WriteLine(item);
+            //}
+            //*/
+
+
+            //// ======================================================
+            //// Simple IEnumerable Example
+            //// ======================================================
+
+            //List<int> numbers = new List<int>
+            //{
+            //    10,
+            //    20,
+            //    30,
+            //    40
+            //};
+
+            //IEnumerable<int> enumerableNumbers = numbers;
+
+            //foreach (var number in enumerableNumbers)
+            //{
+            //    Console.WriteLine(number);
+            //}
+
+
+            //// ======================================================
+            //// Get Enumerator Manually
+            //// ======================================================
+
+            //IEnumerator<int> enumerator =
+            //    enumerableNumbers.GetEnumerator();
+
+            //while (enumerator.MoveNext())
+            //{
+            //    Console.WriteLine(enumerator.Current);
+            //}
+
+
+            //// ======================================================
+            //// IEnumerable with a Method
+            //// ======================================================
+
+            //// The method only needs to read the collection,
+            //// so IEnumerable is suitable here.
+
+            // void PrintNumbers(IEnumerable<int> number)
+            //{
+            //    foreach (var n in number)
+            //    {
+            //        Console.WriteLine(n);
+            //    }
+            //}
+
+
+            //// The method can receive different collections.
+
+            //List<int> listNumbers = new List<int>
+            //{
+            //    1, 2, 3
+            //};
+
+            //HashSet<int> setNumbers = new HashSet<int>
+            //{
+            //    4, 5, 6
+            //};
+
+            //PrintNumbers(listNumbers);
+            //PrintNumbers(setNumbers);
+
+            #endregion
+            #region Think
+
+            /*
+             *
+             * Why not simply use List<int>?
+             *
+             * Because the method does not need List-specific features.
+             *
+             *
+             * If the method only needs:
+             *
+             *     foreach
+             *
+             * then:
+             *
+             *     IEnumerable<int>
+             *
+             * is enough.
+             *
+             *
+             * Example:
+             *
+             * static void PrintProducts(IEnumerable<Product> products)
+             *
+             *
+             * The method can receive:
+             *
+             * List<Product>
+             * HashSet<Product>
+             * other IEnumerable<Product> collections
+             *
+             *
+             * The method only cares about:
+             *
+             * "Can I iterate through these products?"
+             *
+             */
+
+            #endregion
+            #region IEnumerable vs IList
+
+            /*
+             *
+             * IEnumerable<T>
+             *      ↓
+             * Mainly for reading / iteration.
+             *
+             *      foreach
+             *
+             *
+             * IList<T>
+             *      ↓
+             * Gives additional capabilities.
+             *
+             *      Index
+             *      Add
+             *      Remove
+             *      Insert
+             *      Count
+             *
+             *
+             * Example:
+             *
+             * IEnumerable<int> numbers
+             *
+             * You can:
+             *
+             * foreach (var number in numbers)
+             *
+             *
+             * But you cannot directly do:
+             *
+             * numbers.Add(100);
+             *
+             *
+             * Because IEnumerable does not provide Add().
+             *
+             */
+
+            #endregion
+
+
+            #region Practice
+
+            ///*
+            // * ==================== IEnumerable Practice ====================
+            // *
+            // * 10 Real-Life Practice Questions
+            // *
+            // * Focus:
+            // * - IEnumerable
+            // * - GetEnumerator
+            // * - foreach
+            // * - Reading collections
+            // * - Passing different collections to one method
+            // *
+            // */
+
+
+            //// Q1:
+            //// Imagine you have a list of customer names.
+            ////
+            //// Create:
+            //// List<string> customers
+            ////
+            //// Add 5 customer names.
+            ////
+            //// Create a method:
+            //// PrintCustomers(IEnumerable<string> customers)
+            ////
+            //// Print all customers using foreach.
+            //Console.WriteLine("==========questiion 1=========="); 
+            //void PrintCustomers(IEnumerable<string> customers)
+            //{
+            //    foreach(string customer in customers)
+            //    {
+            //        Console.Write(customer+",");
+            //    }
+            //}
+            //List<string> strings = new List<string>() { "Hossam", "Ali", "Tareq", "osame", "Abdoullah" };
+            //PrintCustomers(strings);
+            //Console.WriteLine();
+
+            //// Q2:
+            //// Imagine you have a list of product prices.
+            ////
+            //// Create:
+            //// List<double> prices
+            ////
+            //// Pass it to:
+            //// PrintPrices(IEnumerable<double> prices)
+            ////
+            //// Print every price.
+            //Console.WriteLine("==========questiion 1==========");
+            //void PrintPrices(IEnumerable<double> prices)
+            //{
+            //    foreach(double price in prices)
+            //    {
+            //        Console.Write(price+",");
+            //    }
+            //}
+            //List<double> doubles = new List<double>() { 200, 30000, 493, 2323 };
+            //PrintPrices(doubles);
+            //Console.WriteLine();
+
+
+            ///*
+            // * Q3:
+            // * A store has a HashSet<string> containing
+            // * product categories.
+            // *
+            // * Create at least 5 categories.
+            // *
+            // * Write a method:
+            // *
+            // * PrintCategories(IEnumerable<string> categories)
+            // *
+            // * Print all categories.
+            // *
+            // * Notice that the method works with HashSet<string>
+            // * even though it was not specifically designed
+            // * for HashSet.
+            // */
+            //Console.WriteLine("==========questiion 3==========");
+            //void PrintCategories(IEnumerable<string> categories)
+            //{
+            //    foreach (string category in categories)
+            //    {
+            //        Console.Write(category+",");
+            //    }
+            //}
+            //HashSet<string> strings1 = new HashSet<string>() { "Electronics", "Clothing", "Books", "Toys", "Furniture" };
+            //PrintCategories(strings1);
+            //Console.WriteLine();
+
+
+
+            //// Q4:
+            //// A school has a List<int> containing
+            //// student grades.
+            ////
+            //// Write a method:
+            ////
+            //// PrintGrades(IEnumerable<int> grades)
+            ////
+            //// Print all grades.
+            ////
+            //// The method should NOT modify the collection.
+            //Console.WriteLine("==========questiion 4==========");
+            //void PrintGrades(IEnumerable<int> grades)
+            //{
+            //    foreach (int grade in grades)
+            //    {
+            //        Console.Write(grade+",");
+            //    }
+            //}
+            //List<int> ints = new List<int>() { 88,77,79,90,80 };
+            //PrintGrades(ints);
+            //Console.WriteLine();
+
+
+            //// Q5:
+            //// A company has a list of employee salaries.
+            ////
+            //// Write a method:
+            ////
+            //// PrintHighSalaries(IEnumerable<double> salaries)
+            ////
+            //// Inside the method, use foreach to print
+            //// only salaries greater than 10000.
+            //Console.WriteLine("==========questiion 5==========");
+            //void PrintHighSalaries(IEnumerable<double> salaries)
+            //{
+            //    foreach(int salar in salaries)
+            //    {
+            //        if (salar>10000)
+            //        {
+
+            //        Console.Write(salar+",");
+            //        }
+            //    }
+            //}
+            //List<double> ints1 = new List<double>() { 10000, 9000, 15000, 3000, 20000 };
+            //PrintHighSalaries(ints1);
+            //Console.WriteLine();
+
+            ///*
+            // * Q6:
+            // * A hospital has a list of patient names.
+            // *
+            // * Write a method:
+            // *
+            // * PrintPatients(IEnumerable<string> patients)
+            // *
+            // * Print each patient with a number:
+            // *
+            // * Patient 1: Ali
+            // * Patient 2: Ahmed
+            // * ...
+            // *
+            // * Use foreach.
+            // */
+            //Console.WriteLine("==========questiion 6==========");
+            //void PrintPatients(IEnumerable<string> patients)
+            //{
+            //    int NumberOfPatient = 0;
+            //    foreach (string patient in patients)
+            //    {
+            //        NumberOfPatient++;
+            //        Console.WriteLine($"patient {NumberOfPatient}:{patient}");
+            //    }
+            //}
+            //List<string> strings2= new List<string>() { "Ali", "Ahmed", "Sara", "Mona" };
+            //PrintPatients(strings2);
+            //Console.WriteLine();
+
+
+            //// Q7:
+            //// A restaurant has a HashSet<string>
+            //// containing unique meal names.
+            ////
+            //// Write a method:
+            ////
+            //// PrintMeals(IEnumerable<string> meals)
+            ////
+            //// Print all meals.
+            ////
+            //// Call the method using the HashSet.
+            //Console.WriteLine("==========questiion 7==========");
+            //void PrintMeals(IEnumerable<string> meals)
+            //{
+            //    foreach (string meal in meals)
+            //    {
+            //        Console.Write(meal+",");
+            //    }
+            //}
+            //HashSet<string> names = new HashSet<string>() { "Pizza", "Burger", "Pasta","Salad" };
+            //PrintMeals(names);
+            //Console.WriteLine();
+
+
+            ///*
+            // * Q8:
+            // * An online store has:
+            // *
+            // * List<int> orderIds
+            // *
+            // * Write:
+            // *
+            // * PrintOrders(IEnumerable<int> orderIds)
+            // *
+            // * The method should print:
+            // *
+            // * Order ID: 101
+            // * Order ID: 102
+            // * ...
+            // *
+            // * Then call the same method using
+            // * a List<int> and a HashSet<int>.
+            // */
+            //Console.WriteLine("==========questiion 8==========");
+            //void PrintOrders(IEnumerable<int> orderIds)
+            //{
+
+            //    foreach(int id in orderIds)
+            //    {
+            //        Console.Write($"Order ID:{id} ,");
+            //    }
+            //}
+            //List<int> ints2 = new List<int>() { 1, 2, 3, 4, 5 };
+            //HashSet<int>ints3 = new HashSet<int>() { 1, 2, 3, 4, 5 };
+            //PrintOrders(ints2);
+            //Console.WriteLine();
+            //PrintOrders(ints3);
+            //Console.WriteLine();
+
+            //// Q9:
+            //// A company wants a reusable method:
+            ////
+            //// CountItems(IEnumerable<string> items)
+            ////
+            //// The method should count how many items
+            //// exist using foreach.
+            ////
+            //// Test it with:
+            //// 1. List<string>
+            //// 2. HashSet<string>
+            ////
+            //// Think:
+            //// Why can the same method work with both?
+            //Console.WriteLine("==========questiion 9==========");
+            //int CountItems(IEnumerable<string> items)
+            //{
+            //    int count = 0;
+            //    foreach(string item in items)
+            //    {
+            //        count++;
+            //    }
+            //    return count;
+            //}
+            //HashSet<string> strings3 = new HashSet<string>() { "Electronics", "Clothing", "Books", "Toys", "Furniture" };
+            //List<string> strings4 = new List<string>() { "Electronics", "Clothing", "Books"};
+            //Console.WriteLine($"the count of string 3{CountItems(strings3)}");
+            //Console.WriteLine($"the count of string 4{CountItems(strings4)}");
+
+            ///*
+            // * Q10:
+            // * Real-world scenario:
+            // *
+            // * You have two collections of employee names:
+            // *
+            // * List<string> employees
+            // * HashSet<string> uniqueEmployees
+            // *
+            // * Create ONE method:
+            // *
+            // * PrintEmployeeNames(IEnumerable<string> employees)
+            // *
+            // * The method should:
+            // *
+            // * 1. Print all employee names.
+            // * 2. Count the employees using foreach.
+            // *
+            // * Call the same method with both collections.
+            // *
+            // * Question:
+            // *
+            // * Why is IEnumerable a good choice
+            // * for this method?
+            // */
+            //Console.WriteLine("==========questiion 10==========");
+            //int  PrintEmployeeNames(IEnumerable<string> employees)
+            //{
+            //    int count = 0;
+            //    foreach (string employee in employees)
+            //    {
+            //        count++;
+            //        Console.Write(employee+',');
+            //    }
+            //    return count;
+            //}
+            //List<string> employe1=new List<string>() { "Hossam", "Ali", "Tareq", "osame", "Abdoullah" };
+
+            //HashSet<string> uniqueEmployees= new HashSet<string>() { "ahmed" , "sara" , "omar" , "layla" , "karim" };
+            //int count1 = PrintEmployeeNames(employe1);
+            //Console.WriteLine();
+            //Console.WriteLine("the number of employe1 is "+count1); 
+            //int count2 = PrintEmployeeNames(uniqueEmployees);
+            //Console.WriteLine();
+            //Console.WriteLine("the number of uniqueEmployees is "+count2);
+            #endregion
+
+
+            #region Mistakes
+
+            /*
+             * ==================== Common Mistakes ====================
+             *
+             *
+             * Mistake 1:
+             *
+             * Thinking IEnumerable is a collection itself.
+             *
+             * IEnumerable is an interface/contract.
+             *
+             *
+             *
+             * Mistake 2:
+             *
+             * Expecting Add(), Remove(), or an indexer
+             * from IEnumerable.
+             *
+             * IEnumerable is mainly concerned with iteration.
+             *
+             *
+             *
+             * Mistake 3:
+             *
+             * Using a concrete type unnecessarily.
+             *
+             * Instead of:
+             *
+             * static void Print(List<int> numbers)
+             *
+             * Prefer:
+             *
+             * static void Print(IEnumerable<int> numbers)
+             *
+             * when the method only needs to read/iterate.
+             *
+             *
+             *
+             * Mistake 4:
+             *
+             * Confusing IEnumerable with IEnumerator.
+             *
+             *
+             * IEnumerable
+             *      ↓
+             * Provides GetEnumerator()
+             *
+             *
+             * IEnumerator
+             *      ↓
+             * Controls the iteration
+             *
+             *      MoveNext()
+             *      Current
+             *      Reset()
+             *
+             *
+             *
+             * Mistake 5:
+             *
+             * Thinking foreach directly accesses the collection
+             * without an enumerator.
+             *
+             * foreach uses the enumeration mechanism
+             * to move through the elements.
+             *
+             */
+
+            #endregion
+
+            #endregion
+
+            #region Lesson 22 - ICollection<T>
+
+            /*
+             * ==================== What is ICollection<T>? ====================
+             *
+             * ICollection<T> is an interface that provides a general-purpose
+             * way to work with collections.
+             *
+             * It defines basic operations such as:
+             *
+             * - Add
+             * - Remove
+             * - Clear
+             * - Contains
+             * - Count
+             * - CopyTo
+             * - IsReadOnly
+             *
+             *
+             * ==================== Namespace ====================
+             *
+             * ICollection
+             *      ↓
+             * System.Collections
+             *
+             *
+             * ICollection<T>
+             *      ↓
+             * System.Collections.Generic
+             *
+             *
+             * ==================== Why use ICollection<T>? ====================
+             *
+             * Use ICollection<T> when you need a collection that supports
+             * basic collection operations such as adding and removing items.
+             *
+             *
+             * It is more powerful than IEnumerable<T> because:
+             *
+             * IEnumerable<T>
+             *      ↓
+             * Mainly iteration
+             *
+             *
+             * ICollection<T>
+             *      ↓
+             * Iteration + basic collection operations
+             *
+             *
+             * ==================== Main Idea ====================
+             *
+             * ICollection<T> is a contract.
+             *
+             * It says:
+             *
+             * "Any class that implements me must provide
+             * these operations."
+             *
+             *
+             * Your class:
+             *
+             * MyCustomCollection<T>
+             *          ↓
+             * implements
+             *          ↓
+             * ICollection<T>
+             *          ↓
+             * therefore it MUST implement
+             *          ↓
+             * Add()
+             * Remove()
+             * Clear()
+             * Contains()
+             * Count
+             * IsReadOnly
+             * CopyTo()
+             *
+             *
+             * ==================== Think ====================
+             *
+             * ICollection<T>
+             *       ↓
+             *      Contract
+             *       ↓
+             * Defines WHAT a collection must provide
+             *
+             * MyCustomCollection<T>
+             *       ↓
+             * Implementation
+             *       ↓
+             * Defines HOW those operations actually work
+             *
+             */
+
+            #region Coding
+
+            //// ======================================================
+            //// Using MyCustomCollection
+            //// ======================================================
+
+            //MyCustomCollection<string> strings =
+            //    new MyCustomCollection<string>();
+
+            //strings.Add("Hossam");
+            //strings.Add("Ali");
+            //strings.Add("Ahmed");
+
+
+            //// ======================================================
+            //// Count
+            //// ======================================================
+
+            //Console.WriteLine(
+            //    $"The count of elements: {strings.Count}");
+
+
+            //// ======================================================
+            //// Contains + Remove
+            //// ======================================================
+
+            //if (strings.Contains("Hossam"))
+            //{
+            //    strings.Remove("Hossam");
+
+            //    Console.WriteLine("Item removed");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("Not exist");
+            //}
+
+
+            //// ======================================================
+            //// RemoveAt
+            //// ======================================================
+
+            //// RemoveAt is NOT part of ICollection<T>.
+            //// We added it ourselves to MyCustomCollection<T>.
+
+            //strings.RemoveAt(0);
+
+
+            //// ======================================================
+            //// Iterate through the collection
+            //// ======================================================
+
+            //Console.WriteLine("=========== Elements ===========");
+
+            //foreach (string item in strings)
+            //{
+            //    Console.WriteLine(item);
+            //}
+
+
+
+
+            #endregion
+
+
+
+
+
+
+
+
+
+
+
+            #region Practice
+
+            ///*
+            // * ==================== ICollection<T> Practice ====================
+            // *
+            // * 10 Real-Life Practice Questions
+            // *
+            // * Difficulty: Medium
+            // *
+            // * Focus on:
+            // * - ICollection<T> as a contract
+            // * - IEnumerable<T> relationship
+            // * - MyCustomCollection<T>
+            // * - Writing reusable methods
+            // * - Different collection implementations
+            // * - Count / Contains / Remove / CopyTo
+            // * - Understanding what belongs to the interface
+            // *
+            // */
+
+
+            //// ======================================================
+            //// Q1 - Employee Management
+            //// ======================================================
+
+            ///*
+            // * Create:
+            // *
+            // * MyCustomCollection<string> employees
+            // *
+            // * Add 6 employee names.
+            // *
+            // * Create a method:
+            // *
+            // * PrintCollection(ICollection<string> employees)
+            // *
+            // * Inside the method:
+            // * - Print Count.
+            // * - Print all employees using foreach.
+            // *
+            // * Call the method using your custom collection.
+            // *
+            // * Think:
+            // * Why can ICollection<string> be used as
+            // * the parameter instead of MyCustomCollection<string>?
+            // */
+            //Console.WriteLine("==========questiion 1==========");
+            //   MyCustomCollection<string> employees= new MyCustomCollection<string>();
+            //   employees.Add("Hossam");
+            //   employees.Add("Ali");
+            //   employees.Add("Ahmed");
+            //   employees.Add("Sana");
+            //   employees.Add("Handa");
+
+
+            //   void PrintCollection(ICollection<string> Employees)
+            //   {
+            //       int count = 0;
+            //       foreach (string item in Employees)
+            //       {
+            //           Console.Write(item+",");
+            //           count++;
+            //       }
+            //       Console.WriteLine($"\nThe count of collection item {count}");
+            //   }
+
+            //   PrintCollection(employees); Console.WriteLine();
+
+
+            //   // ======================================================
+            //   // Q2 - Remove Employee
+            //   // ======================================================
+
+            //   /*
+            //    * Using the employees collection from Q1:
+            //    *
+            //    * Create:
+            //    *
+            //    * RemoveEmployee(
+            //    *     ICollection<string> employees,
+            //    *     string employeeName)
+            //    *
+            //    * The method should:
+            //    *
+            //    * 1. Check whether the employee exists.
+            //    * 2. Remove the employee if found.
+            //    * 3. Print whether the operation succeeded.
+            //    *
+            //    * Test it with:
+            //    * - An existing employee.
+            //    * - A non-existing employee.
+            //    */
+            //   Console.WriteLine("==========questiion 2==========");
+
+            //   void RemoveEmployee(ICollection<string> Employees,string employeeName)
+            //   {
+            //       if (Employees.Contains(employeeName))
+            //       {
+            //           Console.WriteLine($"Exsit {employeeName}");
+            //           if (Employees.Remove(employeeName))
+            //           {
+            //               Console.WriteLine("the employee removing:and operation success");
+            //           }
+            //           else
+            //           {
+            //               Console.WriteLine("Not removing:operation Not successed");
+            //           }
+            //       }
+            //       else
+            //       {
+            //           Console.WriteLine($"Not Exsit {employeeName}");
+            //       }
+            //   }
+            //   RemoveEmployee(employees, "Hossam");
+
+            //   Console.WriteLine("------");
+            //   RemoveEmployee(employees, "A");
+
+
+            //   // ======================================================
+            //   // Q3 - Shopping Cart
+            //   // ======================================================
+
+            //   /*
+            //    * Create:
+            //    *
+            //    * MyCustomCollection<string> cart
+            //    *
+            //    * Add:
+            //    *
+            //    * "Laptop"
+            //    * "Mouse"
+            //    * "Keyboard"
+            //    * "Monitor"
+            //    * "Headset"
+            //    *
+            //    * Create:
+            //    *
+            //    * RemoveProduct(
+            //    *     ICollection<string> cart,
+            //    *     string product)
+            //    *
+            //    * Remove:
+            //    *
+            //    * "Mouse"
+            //    * "Printer"
+            //    *
+            //    * Observe the difference between
+            //    * an existing and non-existing product.
+            //    */
+            //   Console.WriteLine("==========questiion 3==========");
+
+            //   MyCustomCollection<string> Cart= new MyCustomCollection<string>();
+            //   Cart.Add("Laptop");
+            //   Cart.Add("Mouse");
+            //   Cart.Add("Keyboard");
+            //   Cart.Add("Monitor");
+            //   Cart.Add("Headset");
+
+            //   void RemoveProduct(ICollection<string> cart,string productName)
+            //   {
+            //       if (cart.Contains(productName))
+            //       {
+            //           Console.WriteLine($"Exsit {productName}");
+            //           if (cart.Remove(productName))
+            //           {
+            //               Console.WriteLine("the Product removing:and operation success");
+            //           }
+            //           else
+            //           {
+            //               Console.WriteLine("Not removing:operation Not successed");
+            //           }
+            //       }
+            //       else
+            //       {
+            //           Console.WriteLine($"Not Exsit {productName}");
+            //       }
+            //   }
+            //   RemoveProduct(Cart, "Mouse");
+            //   RemoveProduct(Cart, "Printer");
+
+            //   // ======================================================
+            //   // Q4 - Different Implementations
+            //   // ======================================================
+
+            //   /*
+            //    * Create:
+            //    *
+            //    * List<string> listCustomers
+            //    *
+            //    * HashSet<string> uniqueCustomers
+            //    *
+            //    * Add some customer names to both.
+            //    *
+            //    * Create ONE method:
+            //    *
+            //    * PrintCustomers(ICollection<string> customers)
+            //    *
+            //    * The method should:
+            //    *
+            //    * - Print Count.
+            //    * - Print all customers.
+            //    *
+            //    * Call the SAME method with:
+            //    *
+            //    * listCustomers
+            //    * uniqueCustomers
+            //    *
+            //    * Think:
+            //    *
+            //    * Why does one method work with two different
+            //    * concrete collection types?
+            //    */
+            //   Console.WriteLine("==========questiion 1==========");
+
+            //   void PrintCustomers(ICollection<string> customers)
+            //   {
+            //       int count = 0;
+            //       foreach (string customer in customers)
+            //       {
+            //           count++;
+            //           Console.Write(customer+","); 
+            //       }
+            //       Console.WriteLine($"\nthe number of customer:{count}");
+
+            //   }
+            //   List<string> Customers = new List<string>()
+            //   {
+            //       "Hossam", "Ali", "Ahmed", "Sana", "Handa"
+            //   };
+            //   HashSet<string> UniqueCustomers = new HashSet<string>()
+            //   {
+            //       "Hossam", "Ali", "Ahmed", "Sana", "Handa"
+            //   };
+
+            //   PrintCustomers(Customers);
+            //   PrintCustomers(UniqueCustomers);
+            //   // ======================================================
+            //   // Q5 - CopyTo
+            //   // ======================================================
+
+            //   /*
+            //    * A company has:
+            //    *
+            //    * MyCustomCollection<string> employees
+            //    *
+            //    * Add 5 employees.
+            //    *
+            //    * Create:
+            //    *
+            //    * string[] employeeArray = new string[5];
+            //    *
+            //    * Use CopyTo() to copy the collection
+            //    * into the array.
+            //    *
+            //    * Print the array.
+            //    *
+            //    * Then try:
+            //    *
+            //    * string[] employeeArray = new string[10];
+            //    *
+            //    * and start copying from index 2.
+            //    *
+            //    * Observe where the employees are stored.
+            //    */
+            //   Console.WriteLine("==========questiion 5==========");
+            //   MyCustomCollection<string> Employeess = new MyCustomCollection<string>() { "Hossam", "Ali", "Ahmed", "Sana", "Handa" };
+            //   string[] employeeArray = new string[5];
+
+            //   Employeess.CopyTo(employeeArray, 0);
+
+            //   foreach (string employee in employeeArray)
+            //   {
+            //       Console.Write(employee+",");
+            //   }
+            //   Console.WriteLine();
+
+            //   string[] employeeArray1= new string[10];
+            //   Employeess.CopyTo(employeeArray1, 2);
+            //   foreach (string employee in employeeArray1)
+            //   {
+            //       Console.Write(employee+",");
+            //   }
+
+
+
+            //   // ======================================================
+            //   // Q6 - Collection Report
+            //   // ======================================================
+
+            //   /*
+            //    * Create:
+            //    *
+            //    * MyCustomCollection<int> orderIds
+            //    *
+            //    * Add 8 order IDs.
+            //    *
+            //    * Create:
+            //    *
+            //    * void PrintCollectionReport(ICollection<int> orders)
+            //    *
+            //    * The method should print:
+            //    *
+            //    * - Number of orders.
+            //    * - All order IDs.
+            //    * - Whether order 1005 exists.
+            //    *
+            //    * Do NOT modify the collection inside the method.
+            //    *
+            //    * Think:
+            //    *
+            //    * Is ICollection<T> the best possible interface
+            //    * if the method only reads the collection?
+            //    *
+            //    * Why?
+            //    */
+            //   Console.WriteLine("==========questiion 6==========");
+            //   MyCustomCollection<int> orderIds=new MyCustomCollection<int>() { 1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008 };
+            //   void PrintCollectionReport(ICollection<int> orders)
+            //   {
+            //       int count = 0;
+            //       foreach(int item in orders)
+            //       {
+            //           count++;
+            //           Console.Write(item+",");
+            //       }
+            //       Console.WriteLine("the number of order "+count);
+
+            //       if (orders.Contains(1005))
+            //       {
+            //           Console.WriteLine("the order is Exsit");
+            //       }
+            //   }
+
+
+            //   // ======================================================
+            //   // Q7 - Build Your Own RemoveAt
+            //   // ======================================================
+
+            //   /*
+            //    * Your MyCustomCollection<T> has:
+            //    *
+            //    * Remove(T item)
+            //    *
+            //    * but ICollection<T> does NOT provide:
+            //    *
+            //    * RemoveAt(index)
+            //    *
+            //    * Implement:
+            //    *
+            //    * RemoveAt(int index)
+            //    *
+            //    * Requirements:
+            //    *
+            //    * 1. Check if the index is valid.
+            //    * 2. Remove the element at that index.
+            //    * 3. Return true if removed.
+            //    * 4. Return false if the index is invalid.
+            //    *
+            //    * Test:
+            //    *
+            //    * RemoveAt(0)
+            //    * RemoveAt(3)
+            //    * RemoveAt(100)
+            //    */
+            //   Console.WriteLine("==========questiion 1==========");
+
+
+            //   // ======================================================
+            //   // Q8 - IsReadOnly
+            //   // ======================================================
+
+            //   /*
+            //    * Create:
+            //    *
+            //    * MyCustomCollection<string> tasks
+            //    *
+            //    * Add several tasks.
+            //    *
+            //    * Print:
+            //    *
+            //    * tasks.IsReadOnly
+            //    *
+            //    * Then create:
+            //    *
+            //    * void AddTask(
+            //    *     ICollection<string> tasks,
+            //    *     string task)
+            //    *
+            //    * Inside the method:
+            //    *
+            //    * Check IsReadOnly.
+            //    *
+            //    * If it is false:
+            //    *     Add the task.
+            //    *
+            //    * Otherwise:
+            //    *     Print "Collection is read-only".
+            //    *
+            //    * Test the method with your custom collection.
+            //    */
+            //   Console.WriteLine("==========questiion 1==========");
+
+
+            //   // ======================================================
+            //   // Q9 - Generic Reusable Method
+            //   // ======================================================
+
+            //   /*
+            //    * Create a generic method:
+            //    *
+            //    * void PrintCollection<T>(
+            //    *     ICollection<T> collection)
+            //    *
+            //    * The method should:
+            //    *
+            //    * - Print Count.
+            //    * - Print every item.
+            //    *
+            //    * Test it with:
+            //    *
+            //    * MyCustomCollection<string>
+            //    * MyCustomCollection<int>
+            //    *
+            //    * Think:
+            //    *
+            //    * Why don't we need to create:
+            //    *
+            //    * PrintStringCollection()
+            //    * PrintIntCollection()
+            //    *
+            //    * separately?
+            //    */
+            //   Console.WriteLine("==========questiion 1==========");
+
+
+            //   // ======================================================
+            //   // Q10 - Real Project Scenario
+            //   // ======================================================
+
+            //   /*
+            //    * Imagine you are building a simple
+            //    * License Management System.
+            //    *
+            //    * You need a collection of license IDs.
+            //    *
+            //    * Create:
+            //    *
+            //    * MyCustomCollection<int> licenses
+            //    *
+            //    * Add:
+            //    *
+            //    * 101
+            //    * 102
+            //    * 103
+            //    * 104
+            //    * 105
+            //    *
+            //    * Create this method:
+            //    *
+            //    * ProcessLicenses(ICollection<int> licenses)
+            //    *
+            //    * The method should:
+            //    *
+            //    * 1. Print the number of licenses.
+            //    *
+            //    * 2. Check whether license 103 exists.
+            //    *
+            //    * 3. Remove license 103.
+            //    *
+            //    * 4. Check again whether license 103 exists.
+            //    *
+            //    * 5. Print all remaining licenses.
+            //    *
+            //    *
+            //    * Then answer in a comment:    
+            //    *
+            //    * Why did we use ICollection<int>
+            //    * as the parameter instead of
+            //    * MyCustomCollection<int>?
+            //    *
+            //    * And:
+            //    *
+            //    * Which operations in this method are
+            //    * provided by ICollection<T>?
+            //    *
+            //    * Which operation is provided by
+            //    * your own MyCustomCollection<T>?
+            //    */
+            //   Console.WriteLine("==========questiion 1==========");
+
+            #endregion
+
+
+            #region Mistakes
+
+            /*
+             * ==================== Mistakes We Made ====================
+             *
+             *
+             * Mistake 1:
+             *
+             * Confusing ICollection with ICollection<T>.
+             *
+             *
+             * ICollection
+             *      ↓
+             * System.Collections
+             *      ↓
+             * Non-generic
+             *
+             *
+             * ICollection<T>
+             *      ↓
+             * System.Collections.Generic
+             *      ↓
+             * Generic
+             *
+             *
+             *
+             * Mistake 2:
+             *
+             * Thinking RemoveAt() is part of ICollection<T>.
+             *
+             * It is NOT.
+             *
+             * ICollection<T> provides:
+             *
+             * Remove(item)
+             *
+             * but not:
+             *
+             * RemoveAt(index)
+             *
+             *
+             * Your RemoveAt() is a custom method
+             * that you added to MyCustomCollection<T>.
+             *
+             *
+             *
+             * Mistake 3:
+             *
+             * Your RemoveAt implementation:
+             *
+             * return Remove(item[Index]);
+             *
+             * works, but it has a possible problem.
+             *
+             * If Index is invalid:
+             *
+             * item[Index]
+             *
+             * can throw an exception.
+             *
+             * Safer version:
+             *
+             * public bool RemoveAt(int index)
+             * {
+             *     if (index < 0 || index >= item.Count)
+             *         return false;
+             *
+             *     item.RemoveAt(index);
+             *     return true;
+             * }
+             *
+             *
+             *
+             * Mistake 4:
+             *
+             * Thinking ICollection<T> tells us HOW
+             * the collection stores its data.
+             *
+             * It does not.
+             *
+             * It only defines the contract.
+             *
+             * Your implementation decides the storage.
+             *
+             * In your case:
+             *
+             * ICollection<T>
+             *       ↓
+             * MyCustomCollection<T>
+             *       ↓
+             * private List<T> item
+             *
+             *
+             *
+             * Mistake 5:
+             *
+             * Forgetting why IEnumerable<T> is also implemented.
+             *
+             * ICollection<T> inherits from IEnumerable<T>.
+             *
+             * Therefore your collection can be used with:
+             *
+             * foreach
+             *
+             * because it provides GetEnumerator().
+             *
+             */
+
+            #endregion
+
+            #endregion
+
+            #region Lesson 23 - IList<T>
+
+            /*
+             * ==================== What is it? ====================
+             *
+             * IList<T> is a generic interface in System.Collections.Generic.
+             *
+             * It represents a collection that supports:
+             * - Index-based access
+             * - Insert
+             * - RemoveAt
+             * - IndexOf
+             *
+             * IList<T> inherits from ICollection<T>,
+             * and ICollection<T> inherits from IEnumerable<T>.
+             *
+             *
+             * ==================== Relationship ====================
+             *
+             * IEnumerable<T>
+             *      ↓
+             * ICollection<T>
+             *      ↓
+             * IList<T>
+             *
+             *
+             * IEnumerable<T>
+             * - Mainly used for iteration.
+             *
+             * ICollection<T>
+             * - Adds basic collection operations.
+             *
+             * IList<T>
+             * - Adds index-based operations.
+             *
+             *
+             * ==================== Why use it? ====================
+             *
+             * - When we need to access elements by index.
+             * - When we need to insert an element at a specific position.
+             * - When we need to remove an element by index.
+             * - When we need to find the index of an element.
+             *
+             *
+             * ==================== Important Operations ====================
+             *
+             * - Add(T item)
+             *      Adds an item to the collection.
+             *
+             * - [index]
+             *      Gets or sets an item using its index.
+             *
+             * - Insert(int index, T item)
+             *      Inserts an item at a specific index.
+             *
+             * - RemoveAt(int index)
+             *      Removes the item at a specific index.
+             *
+             * - IndexOf(T item)
+             *      Returns the index of the first matching item.
+             *      Returns -1 if the item does not exist.
+             *
+             * - Remove(T item)
+             *      Removes the first matching item.
+             *
+             * - Contains(T item)
+             *      Checks whether an item exists.
+             *
+             * - Count
+             *      Returns the number of elements.
+             *
+             * - Clear()
+             *      Removes all elements.
+             *
+             * - IsReadOnly
+             *      Indicates whether the collection is read-only.
+             *
+             *
+             * ==================== Important Difference ====================
+             *
+             * ICollection<T>
+             *      ↓
+             * Basic collection operations
+             *
+             * IList<T>
+             *      ↓
+             * Basic collection operations
+             * +
+             * Index-based operations
+             *
+             *
+             * Example:
+             *
+             * ICollection<T>
+             *      employees.Add("Hossam");
+             *
+             * IList<T>
+             *      employees[0]
+             *      employees.Insert(1, "Ali");
+             *      employees.RemoveAt(0);
+             *      employees.IndexOf("Hossam");
+             *
+             *
+             * ==================== Mental Model ====================
+             *
+             * IList<T>
+             *      ↓
+             * "I have a collection AND I can work with it by index."
+             *
+             */
+
+            #region Coding
+
+            //// ======================================================
+            //// Basic IList<T> Implementation
+            //// ======================================================
+
+
+
+            //// ======================================================
+            //// Using SimpleList<T>
+            //// ======================================================
+            
+            //SimpleList<string> strings = new SimpleList<string>();
+            
+            //strings.Add("Hossam");
+            // strings.Add("Ali");
+             
+            // strings.Insert(2, "Ahmed");
+             
+            // strings[2] = "Handa";
+             
+             
+            // // ======================================================
+            // // Using foreach
+            // // ======================================================
+             
+            // Console.Write("The custom list with foreach: ");
+             
+            // foreach (string s in strings)
+            // {
+            //     Console.Write(s + ",");
+            // }
+             
+            //     Console.WriteLine();
+             
+             
+            // // ======================================================
+            // // Using for + Indexer
+            // // ======================================================
+             
+            // Console.Write("The custom list with for: ");
+             
+            // for (int i = 0; i<strings.Count; i++)
+            // {
+            //     Console.Write(strings[i] + ",");
+            // }
+             
+            // Console.WriteLine();
+             
+             
+            // // ======================================================
+            // // Contains + IndexOf + Remove
+            // // ======================================================
+             
+            // if (strings.Contains("Hossam"))
+            // {
+            //     Console.WriteLine(
+            //         $"The index of student: {strings.IndexOf("Hossam")}"
+            //     );
+             
+            //     if (strings.Remove("Hossam"))
+            //     {
+            //         Console.WriteLine("We removed the student.");
+            //     }
+            //     else
+            //     {
+            //         Console.WriteLine("The student was not removed.");
+            //     }
+            // }
+            // else
+            // {
+            //     Console.WriteLine("Not exist");
+            // }
+             
+             
+            // // ======================================================
+            // // Clear
+            // // ======================================================
+             
+            // strings.Clear();
+             
+            #endregion
+
+         
+            #region Practice
+            
+            /*
+             * ==================== IList<T> Practice ====================
+             *
+             * 10 Real-Life Practice Questions
+             *
+             * Difficulty: Medium
+             *
+             * Focus on:
+             * - IList<T> as a contract
+             * - Relationship with ICollection<T>
+             * - Indexer
+             * - Insert
+             * - RemoveAt
+             * - IndexOf
+             * - Different IList<T> implementations
+             * - Reusable methods
+             * - Real-life scenarios
+             */
+            
+            
+            // ======================================================
+            // Q1 - Student List
+            // ======================================================
+            
+            /*
+             * Create:
+             *
+             * IList<string> students
+             *
+             * Use List<string> as the implementation.
+             *
+             * Add 5 students.
+             *
+             * Then:
+             * - Print all students.
+             * - Print the student at index 2.
+             *
+             * Think:
+             * Why can IList<string> reference a List<string>?
+             */
+            
+            
+            // ======================================================
+            // Q2 - Update Employee
+            // ======================================================
+            
+            /*
+             * Create an IList<string> employees.
+             *
+             * Add:
+             * - Hossam
+             * - Ali
+             * - Ahmed
+             * - Sana
+             *
+             * Change the employee at index 1 to "Omar"
+             * using the indexer.
+             *
+             * Print the collection.
+             */
+            
+            
+            // ======================================================
+            // Q3 - Insert Product
+            // ======================================================
+            
+            /*
+             * Create:
+             *
+             * IList<string> products
+             *
+             * Add:
+             * Laptop
+             * Mouse
+             * Keyboard
+             * Monitor
+             *
+             * Insert "Printer" at index 2.
+             *
+             * Print the final collection.
+             *
+             * Observe how the indexes changed.
+             */
+            
+            
+            // ======================================================
+            // Q4 - Remove Product By Index
+            // ======================================================
+            
+            /*
+             * Create an IList<string> cart.
+             *
+             * Add 5 products.
+             *
+             * Remove the product at index 2.
+             *
+             * Print the remaining products.
+             *
+             * Think:
+             * What is the difference between:
+             *
+             * Remove("Mouse")
+             *
+             * and:
+             *
+             * RemoveAt(2)
+             */
+            
+            
+            // ======================================================
+            // Q5 - Find Employee
+            // ======================================================
+            
+            /*
+             * Create an IList<string> employees.
+             *
+             * Add 6 employees.
+             *
+             * Create:
+             *
+             * int FindEmployee(
+             *     IList<string> employees,
+             *     string employeeName)
+             *
+             * Return the index of the employee.
+             *
+             * Test:
+             * - Existing employee.
+             * - Non-existing employee.
+             *
+             * What value does IndexOf return when
+             * the employee doesn't exist?
+             */
+            
+            
+            // ======================================================
+            // Q6 - Reusable IList Method
+            // ======================================================
+            
+            /*
+             * Create:
+             *
+             * void PrintList(IList<string> items)
+             *
+             * The method should:
+             * - Print Count.
+             * - Print every item using a for loop.
+             *
+             * Why can you use:
+             *
+             * items[i]
+             *
+             * inside the method?
+             */
+            
+            
+            // ======================================================
+            // Q7 - Order Management
+            // ======================================================
+            
+            /*
+             * Create:
+             *
+             * IList<int> orderIds
+             *
+             * Add 6 order IDs.
+             *
+             * Create:
+             *
+             * void RemoveOrder(
+             *     IList<int> orders,
+             *     int index)
+             *
+             * The method should:
+             * - Check whether the index is valid.
+             * - Remove the order using RemoveAt().
+             * - Print whether the operation succeeded.
+             *
+             * Test:
+             * - Valid index.
+             * - Invalid index.
+             */
+            
+            
+            // ======================================================
+            // Q8 - Insert Customer
+            // ======================================================
+            
+            /*
+             * Create:
+             *
+             * IList<string> customers
+             *
+             * Add 5 customers.
+             *
+             * Create:
+             *
+             * void InsertCustomer(
+             *     IList<string> customers,
+             *     int index,
+             *     string customer)
+             *
+             * The method should:
+             * - Validate the index.
+             * - Insert the customer.
+             * - Print the final list.
+             *
+             * Think:
+             * What indexes are valid for Insert?
+             */
+            
+            
+            // ======================================================
+            // Q9 - Different Implementations
+            // ======================================================
+            
+            /*
+             * Create:
+             *
+             * IList<string> list1 = new List<string>();
+             *
+             * IList<string> list2 = new ObservableCollection<string>();
+             *
+             * Add several items to both.
+             *
+             * Create ONE method:
+             *
+             * void PrintItems(IList<string> items)
+             *
+             * Print all items using the indexer.
+             *
+             * Call the same method with both collections.
+             *
+             * Think:
+             * Why does the same method work with
+             * different concrete classes?
+             */
+            
+            
+            // ======================================================
+            // Q10 - Real Project Scenario
+            // ======================================================
+            
+            /*
+             * Imagine you are building a
+             * Driving License Management System.
+             *
+             * You have a list of application IDs:
+             *
+             * IList<int> applicationIds
+             *
+             * Add:
+             * 101
+             * 102
+             * 103
+             * 104
+             * 105
+             *
+             * Create:
+             *
+             * void ProcessApplications(
+             *     IList<int> applications)
+             *
+             * The method should:
+             *
+             * 1. Print the number of applications.
+             *
+             * 2. Print application at index 2.
+             *
+             * 3. Find the index of application 104.
+             *
+             * 4. Remove application 103.
+             *
+             * 5. Print all remaining applications.
+             *
+             * 6. Insert application 200 at index 1.
+             *
+             * 7. Print the final applications.
+             *
+             *
+             * Then answer in a comment:
+             *
+             * Why did we use IList<int>
+             * instead of List<int> as the parameter?
+             *
+             * Which operations in this method
+             * come from IList<T>?
+             *
+             * Which operations were already inherited
+             * from ICollection<T>?
+             */
+            
+            #endregion
+         
+         
+            #region Mistakes
+         
+             /*
+              * Common mistakes to watch for:
+              *
+              * 1. Confusing Insert with replacing:
+              *
+              * Insert(index, value)
+              *      → adds a new element
+              *
+              * list[index] = value
+              *      → replaces an existing element
+              *
+              *
+              * 2. Confusing Remove with RemoveAt:
+              *
+              * Remove(value)
+              *      → removes by value
+              *
+              * RemoveAt(index)
+              *      → removes by index
+              *
+              *
+              * 3. Forgetting that IndexOf returns -1
+              *    when the item does not exist.
+              *
+              *
+              * 4. Using an invalid index:
+              *
+              * Valid access:
+              *
+              * 0 <= index < Count
+              *
+              *
+              * 5. Forgetting that IList<T> inherits
+              *    the operations of ICollection<T>.
+              *
+              *
+              * 6. Confusing interface and implementation:
+              *
+              * IList<T>
+              *      = contract
+              *
+              * List<T>
+              *      = implementation
+              *
+              * ObservableCollection<T>
+              *      = another implementation
+              *
+              */
+         
+              #endregion
+         
+         #endregion
+
+            /*
+             * IDictionary
+             * 
+             * is interface in system.collection and system.collection.generic  
+             * represent a collection of key-value pairs 
+             * is extend of Icollection and  implement by dictinary and sorted dictionary and concurrentDictionary
+             * the main purpose is provide accessing items using key ensuring efficient data retrival 
+             * key features of IDictionary (key value to access add remove containtkey 
+             * */
+
+
+
         }
-        static(int ID ,string Name,double Price) GetProduct()
+        static (int ID ,string Name,double Price) GetProduct()
         {
             return (1, "Labtop",20000);
         }
