@@ -1,3 +1,6 @@
 <Solution>
   <Project Path="DataSturctureLevel2/DataSturctureLevel2.csproj" Id="cdec4825-2f3d-4b14-82b4-83ba12ad4956" />
+  <Project Path="IDictionary/IDictionary&amp;ISet.csproj" Id="a0f6beea-e229-4fa6-a45e-c08ae8a2af07" />
+  <Project Path="IEnumerable&amp;ICollection/IEnumerable&amp;ICollection.csproj" Id="fc738a63-4344-4c2d-b51d-ecf90c19eb6d" />
+  <Project Path="IList/IList.csproj" Id="834ec98a-ce73-4c81-9a4b-080766fd1f20" />
 </Solution>
